@@ -30,6 +30,8 @@ gem 'ransack', '~> 1.7'
 
 #Authentication
 gem 'devise'
+gem 'cancancan', '~> 1.15'
+
 
 #Image
 gem 'shrine', '~> 2.6', '>= 2.6.1'

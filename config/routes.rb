@@ -1,19 +1,17 @@
 Rails.application.routes.draw do
+  root to: "movies#index"
+
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  scope "/admin" do 
-    resources :users 
+
+  resources :movies, shallow: true do
+    resources :reviews
   end
 
-  root to: "movies#index" 
-  
-  resources :movies, shallow: true do 
-    resources :genres
-    resources :reviews
-  end 
-  
+  resources :users
+  resources :genres
+  resources :movies
+  resources :movie_genres, only: [:create]
+  resources :casts, only: [:create]
+  resources :favorites, only: [:create]
   resources :members
-  resources :favorites 
-  resources :casts
-
 end

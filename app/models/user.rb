@@ -4,10 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :reviews 
+  has_many :reviews, dependent: :destroy
 
   has_many :favorites
-  has_many :movies, through: :favorites 
+  has_many :movies, through: :favorites, dependent: :destroy
 
   enum role: { user: 0, admin: 1 }
 end

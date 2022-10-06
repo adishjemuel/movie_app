@@ -1,6 +1,6 @@
 class Member < ApplicationRecord 
   has_many :casts 
-  has_many :movies, through: :casts 
+  has_many :movies, through: :casts, dependent: :destroy
 
   enum role: { actor: 0, 
                director: 1, 

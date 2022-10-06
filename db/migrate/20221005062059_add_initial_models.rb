@@ -6,11 +6,20 @@ class AddInitialModels < ActiveRecord::Migration[5.1]
       m.datetime :release 
       m.string :trailer_url
       m.timestamps
-    end 
+    end  
+
+    create_table :genres do |g| 
+      g.string :type 
+    end
+
+    create_table :movie_genres do |mg| 
+      mg.belongs_to :movie
+      mg.belongs_to :genre
+    end
 
     create_table :favorites do |f|
-      f.belongs_to :movies 
-      f.belongs_to :users 
+      f.belongs_to :movies
+      f.belongs_to :users
     end
 
     create_table :members do |m| 

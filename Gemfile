@@ -16,9 +16,23 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+
+#React
 gem 'webpacker'
-gem 'react-rails'
+gem 'react-rails' 
+
+# Pagination 
+gem 'kaminari', '~> 0.16.3'
+
+# Search
+gem 'ransack', '~> 1.7'
+
+
+#Authentication
+gem 'devise'
+
+#Image
+gem 'shrine', '~> 2.6', '>= 2.6.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

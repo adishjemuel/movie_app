@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   end
 
   root to: "movies#index" 
+  
+  resources :movies, shallow: true do 
+    resources :genres
+    resources :reviews
+  end 
+  
+  resources :members
+  resources :favorites 
+  resources :casts
 
-  resources :movies do 
-    resources :members, shallow: true
-    resources :genres, shallow: true
-    resources :reviews, shallow: true
-  end
-  resources :movies, only: [:index,:show]
 end

@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   resources :users
   resources :genres
   resources :movies
-  resources :movie_genres, only: [:create]
-  resources :casts, only: [:create]
-  resources :favorites, only: [:create]
+  resources :movie_genres
+  resources :casts
+  resources :favorites
   resources :members
 end

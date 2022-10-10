@@ -1,5 +1,5 @@
 class Movie < ApplicationRecord
-  has_many :reviews 
+  has_many :reviews
 
   has_many :casts
   has_many :members, through: :casts, dependent: :destroy

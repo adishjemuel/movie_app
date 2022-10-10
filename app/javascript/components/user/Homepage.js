@@ -1,8 +1,18 @@
 import React from "react";
-
+import Navbar from "../shared/Navbar";
+import Footer from "../shared/Footer";
 const Homepage = (props) => {
   console.log(props);
-  return <h1> Wewssasdasasdasdd tite </h1>;
+  return (
+    <div>
+      <Navbar/>
+      <div class="container-fluid"> 
+
+
+      </div>
+      <Footer />
+    </div>
+  );
 };
 
 export default Homepage;

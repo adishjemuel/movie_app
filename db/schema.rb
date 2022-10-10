@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20221005062059) do
-
+ActiveRecord::Schema.define(version: 20221009142013) do
+  # Need to revise it just like the Favorites 
   create_table "casts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.bigint "members_id"
     t.bigint "movies_id"
@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 20221005062059) do
   end
 
   create_table "favorites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
-    t.bigint "movies_id"
-    t.bigint "users_id"
-    t.index ["movies_id"], name: "index_favorites_on_movies_id"
-    t.index ["users_id"], name: "index_favorites_on_users_id"
+    t.bigint "movie_id"
+    t.bigint "user_id"
+    t.index ["movie_id"], name: "index_favorites_on_movie_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "genres", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|

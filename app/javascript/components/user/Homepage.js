@@ -40,7 +40,7 @@ const Homepage = (props) => {
             </span>
           ))}
         </section>
-        <div className="container row row-cols-1 row-cols-md-4 g-4 pt-4 d-flex justify-content-center overflow-hidden">
+        <div className="container row row-cols-1 row-cols-md-5 g-4 pt-4 d-flex justify-content-center overflow-hidden">
           {props.movies.map((movie) => (
             <div
               className="col mt-4"
@@ -56,7 +56,7 @@ const Homepage = (props) => {
                 />
                 <div class="card-body">
                   <h5 class="card-title">{movie.title} </h5>
-                  <p class="card-text"> Lorem ipsum </p>
+                  <span class="card-text text-muted"> {movie.formatted_release_date} </span>
                 </div>
               </div>
             </div>

@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20221009142013) do
-  # Need to revise it just like the Favorites 
+ActiveRecord::Schema.define(version: 20221011074237) do
+
   create_table "casts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.bigint "members_id"
     t.bigint "movies_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20221009142013) do
 
   create_table "movies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "title"
-    t.string "summary"
+    t.text "summary"
     t.datetime "release"
     t.string "trailer_url"
     t.datetime "created_at", null: false

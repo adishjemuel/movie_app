@@ -2,10 +2,10 @@ class MoviesController < ApplicationController
   
   before_action :set_movie, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[update destroy create]
-
+ 
   def index
     @q = Movie.ransack(params[:q])
-    @movies = @q.result.page params[:page] 
+    @movies = @q.result.page params[:page]  
     @genres = Genre.all
   end
 

@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
 
-  paginates_per 16
+  paginates_per 20
   has_many :reviews
 
   has_many :casts
@@ -11,4 +11,12 @@ class Movie < ApplicationRecord
 
   has_many :movie_genres 
   has_many :genres, through: :movie_genres, dependent: :destroy
+  
+  attribute :formatted_release_date, :string
+
+  def formatted_release_date 
+    release.respond_to?(:strftime) ? release.strftime("%B %d, %Y"): ""
+  end
+
+
 end

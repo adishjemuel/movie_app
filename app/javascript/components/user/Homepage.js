@@ -24,7 +24,7 @@ const Homepage = (props) => {
     ));
   return (
     <div>
-      <Navbar />
+      <Navbar user={props.user} />
       <div className="container  py-2 px-2">
         <section className="text-center">
           <h1> All Type Of Movies</h1>
@@ -47,23 +47,35 @@ const Homepage = (props) => {
               style={{ height: "25rem" }}
               key={movie.id}
             >
-              <div className="card h-100">
-                <img
-                  src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
-                  className="card-img-top"
-                  style={{ height: "18rem" }}
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">{movie.title} </h5>
-                  <span class="card-text text-muted"> {movie.formatted_release_date} </span>
+              <a
+                href={`/movies/${movie.id}`}
+                style={{
+                  display: "block",
+                  height: "100%",
+                  textDecoration: "none",
+                }}
+              >
+                <div className="card h-100" style={{ cursor: "pointer" }}>
+                  <img
+                    src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
+                    className="card-img-top"
+                    style={{ height: "18rem" }}
+                    alt="..."
+                  />
+                  <div class="card-body text-body">
+                    <h5 class="card-title">{movie.title} </h5>
+                    <span class="card-text text-muted">
+                      {" "}
+                      {movie.formatted_release_date}{" "}
+                    </span>
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
           ))}
         </div>
       </div>
-      {props.pages > 1 ? <Pagination content={content} />: null}
+      {props.pages > 1 ? <Pagination content={content} /> : null}
       <Footer />
     </div>
   );

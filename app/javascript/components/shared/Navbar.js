@@ -22,7 +22,7 @@ const Navbar = (props) => {
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a
-                class="nav-link active text-white mx-3"
+                class="nav-link active text-white ms-5 me-4"
                 aria-current="page"
                 href="#"
               >
@@ -30,13 +30,22 @@ const Navbar = (props) => {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">
+              <a class="nav-link text-white me-5" href="#">
                 People
               </a>
             </li>
+            <form role="search" style={{width:'30rem'}}>
+              <input
+                class="form-control mx-5 w-100"
+                style={{width:'28rem'}}
+                type="search"
+                placeholder="Search for a movie, person, director..."
+                aria-label="Search"
+              />
+            </form>
           </ul>
           <div className="d-flex align-items-center">
-            <a href="/users/sign_up" style={{ textDecoration: "none" }} className="text-white me-4">
+            <a href="/users/sign_up" style={{ textDecoration: "none" }} className="text-white mx-4">
               {" "}
               Join MovieDB{" "}
             </a>
@@ -45,14 +54,6 @@ const Navbar = (props) => {
               {" "}
               Log In{" "}
             </a>
-            <form role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search for a movie, person, director..."
-                aria-label="Search"
-              />
-            </form>
           </div>
         </div>
       </div>

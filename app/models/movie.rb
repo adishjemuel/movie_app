@@ -1,4 +1,6 @@
 class Movie < ApplicationRecord
+
+  paginates_per 16
   has_many :reviews
 
   has_many :casts

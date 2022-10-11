@@ -1,1 +1,1 @@
-<%= react_component('user/Homepage', {movies: @movies, genres: @genres, user: current_user}) %>
+<%= react_component('user/Homepage', {movies: @movies, pages: @movies.total_pages, current_page: @movies.current_page, genres: @genres, user: current_user}) %>

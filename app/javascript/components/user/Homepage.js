@@ -1,14 +1,33 @@
 import React from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
+import Pagination from "../shared/Pagination";
 const Homepage = (props) => {
   console.log(props);
+
+  const content = Array(props.pages)
+    .fill(1)
+    .map((el, index) => (
+      <form action="/movies" method="get" key={index}>
+        <li
+          className={`page-item ${
+            index + 1 == props.currentPage ? "active" : ""
+          }`}
+        >
+          <input name="page" value={index + 1} type="hidden" />
+          <button type="submit" className="page-link">
+            {" "}
+            {index + 1}
+          </button>
+        </li>
+      </form>
+    ));
   return (
     <div>
       <Navbar />
       <div className="container  py-2 px-2">
         <section className="text-center">
-          <h1> Movies </h1>
+          <h1> All Type Of Movies</h1>
         </section>
         <section className="ms-3">
           <span class="badge rounded-pill text-bg-dark px-5 py-2 me-2 mt-2">
@@ -21,14 +40,14 @@ const Homepage = (props) => {
             </span>
           ))}
         </section>
-        <div className="container row row-cols-3 d-flex justify-content-center overflow-hidden">
+        <div className="container row row-cols-1 row-cols-md-4 g-4 pt-4 d-flex justify-content-center overflow-hidden">
           {props.movies.map((movie) => (
             <div
-              className="col w-33.33 mt-4"
+              className="col mt-4"
               style={{ height: "25rem" }}
               key={movie.id}
             >
-              <div className="card ">
+              <div className="card h-100">
                 <img
                   src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
                   className="card-img-top"
@@ -44,6 +63,7 @@ const Homepage = (props) => {
           ))}
         </div>
       </div>
+      {props.pages > 1 ? <Pagination content={content} />: null}
       <Footer />
     </div>
   );

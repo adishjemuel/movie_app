@@ -38,6 +38,6 @@ class MembersController < ApplicationController
 
   def set_member 
     @member = Member.includes(:movies).find params[:id]
-      
+  end
 
 end

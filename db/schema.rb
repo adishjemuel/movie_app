@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20221012070631) do
+ActiveRecord::Schema.define(version: 20221012072003) do
 
   create_table "casts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.bigint "movie_id"
-    t.bigint "user_id"
+    t.bigint "member_id"
+    t.index ["member_id"], name: "index_casts_on_member_id"
     t.index ["movie_id"], name: "index_casts_on_movie_id"
-    t.index ["user_id"], name: "index_casts_on_user_id"
   end
 
   create_table "favorites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|

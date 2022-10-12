@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
   end
 
   def show  
-   @reviews = @movie.reviews.map { |review| [review, review.user] }
+  #  @reviews = @movie.reviews.map { |review| [review, review.user] }
   end
  
   # Refactor for Admin Redirects

@@ -45,10 +45,73 @@ const Movie = (props) => {
         </div>
       </section>
 
-      <section>
-        <div className="container mx-4">
-
+      <section className="container mx-4 px-4">
+        <h1 className="fw-normal"> Cast and Crews </h1>
+        <div className="d-flex flex-nowrap overflow-scroll pt-4">
+          {props.casts_and_crews.map((cast) => (
+            <div className="flex-shrink-0 pe-4 pb-4" key={cast.id}>
+              <a
+                href={`/members/${cast.id}`}
+                style={{
+                  display: "block",
+                  height: "100%",
+                  textDecoration: "none",
+                }}
+              >
+                <div
+                  className="card h-100"
+                  style={{ cursor: "pointer", width: "8rem", height: "5rem" }}
+                >
+                  <img
+                    src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div class="card-body text-body">
+                    <span
+                      class="card-title fw-bold"
+                      style={{ fontSize: "0.9rem" }}
+                    >
+                      {cast.first_name} {cast.last_name}{" "}
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))}
         </div>
+        <h2 className="fw-normal mt-5"> Reviews </h2>
+        <hr className="border border-1 border-dark opacity-100" />
+        <div className="d-flex justify-content-end">
+          <span class="badge rounded-pill text-bg-primary my-2 px-4 py-2">
+            Write A Review
+          </span>
+        </div>
+        {props.reviews.map((review) => (
+          <div class="card mb-3" key={review.id}>
+            <div class="row g-0">
+              <div class="col-md-2" style={{ width: "5rem" }}>
+                <img
+                  src="https://media.istockphoto.com/vectors/user-avatar-profile-icon-black-vector-illustration-vector-id1209654046?k=20&m=1209654046&s=612x612&w=0&h=Atw7VdjWG8KgyST8AXXJdmBkzn0lvgqyWod9vTb2XoE="
+                  class="img-fluid rounded-start"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-10">
+                <div class="card-body">
+                    {/* To be changed to username when added to db */}
+                  <h5 class="card-title">A review by {review.review_user.email}</h5>
+                  <p class="card-text">
+                    {review.body}
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted">{review.created}</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </section>
       <Footer />
     </div>

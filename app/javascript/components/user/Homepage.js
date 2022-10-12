@@ -43,7 +43,7 @@ const Homepage = (props) => {
         <div className="container row row-cols-1 row-cols-md-5 g-4 pt-4 d-flex justify-content-center overflow-hidden">
           {props.movies.map((movie) => (
             <div
-              className="col mt-4"
+              className="col mt-4 pe-4"
               style={{ height: "25rem" }}
               key={movie.id}
             >

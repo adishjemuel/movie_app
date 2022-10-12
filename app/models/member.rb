@@ -1,7 +1,8 @@
 class Member < ApplicationRecord 
   has_many :casts 
   has_many :movies, through: :casts, dependent: :destroy
-
+  
+  enum gender: { male: 0, female: 1 }
   enum role: { actor: 0, 
                director: 1, 
                producer: 2, 

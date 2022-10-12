@@ -24,13 +24,13 @@ const Navbar = (props) => {
               <a
                 class="nav-link active text-white ms-5 me-4"
                 aria-current="page"
-                href="#"
+                href="/"
               >
                 Movies
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white me-5" href="#">
+              <a class="nav-link text-white me-5" href="/members">
                 People
               </a>
             </li>

@@ -4,7 +4,8 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   
   before_action :set_review, only: %i[edit update destroy show] 
-  def new 
+  def new  
+    @movie = Movie.find(params[:movie_id])
   end 
 
   def create 

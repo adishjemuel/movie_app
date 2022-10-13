@@ -2,13 +2,11 @@ import React from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
 
-import "bootstrap-icons/font/bootstrap-icons.css";
 const Movie = (props) => {
   console.log(props);
   return (
     <div>
       <Navbar user={props.user} token={props.token} />
-
       <section
         class="my-5 w-full"
         style={{
@@ -42,37 +40,41 @@ const Movie = (props) => {
                 {" "}
                 {props.movie.summary}{" "}
               </p>
-              <form
-                action={
-                  props.on_list ? `/favorites/${props.movie.id}` : "/favorites"
-                }
-                method="post"
-              >
-                {props.on_list && (
-                  <input name="_method" type="hidden" value="delete" />
-                )}
-                {props.on_list == false && (
-                  <input type="hidden" name="id" value={props.movie.id} />
-                )}
-                <input
-                  name="authenticity_token"
-                  type="hidden"
-                  value={props.token}
-                />
-                <input
-                  name="authenticity_token"
-                  type="hidden"
-                  value={props.token}
-                />
-                <button
-                  type="submit"
-                  className="btn btn-outline-primary text-white text-center"
+              {props.user && (
+                <form
+                  action={
+                    props.on_list
+                      ? `/favorites/${props.movie.id}`
+                      : "/favorites"
+                  }
+                  method="post"
                 >
-                  {props.on_list
-                    ? "Remove From Your Watchlist"
-                    : "Add To Your Watchlist"}
-                </button>
-              </form>
+                  {props.on_list && (
+                    <input name="_method" type="hidden" value="delete" />
+                  )}
+                  {props.on_list == false && (
+                    <input type="hidden" name="id" value={props.movie.id} />
+                  )}
+                  <input
+                    name="authenticity_token"
+                    type="hidden"
+                    value={props.token}
+                  />
+                  <input
+                    name="authenticity_token"
+                    type="hidden"
+                    value={props.token}
+                  />
+                  <button
+                    type="submit"
+                    className="btn btn-outline-primary text-white text-center"
+                  >
+                    {props.on_list
+                      ? "Remove From Your Watchlist"
+                      : "Add To Your Watchlist"}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
@@ -116,9 +118,14 @@ const Movie = (props) => {
         <h2 className="fw-normal mt-5"> Reviews </h2>
         <hr className="border border-1 border-dark opacity-100" />
         <div className="d-flex justify-content-end">
-          <span class="badge rounded-pill text-bg-primary my-2 px-4 py-2">
+          <a style={{textDecoration: 'none'}} href={`/movies/${props.movie.id}/reviews/new`}>
+          <span
+            class="badge rounded-pill text-bg-primary my-2 px-4 py-2 text-white"
+            style={{ cursor: "pointer" }}
+          >
             Write A Review
           </span>
+          </a>
         </div>
         {props.reviews.map((review) => (
           <div class="card mb-3" key={review.id}>

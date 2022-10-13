@@ -1,1 +1,7 @@
-<%= react_component('user/Movie', { user: current_user, movie: @movie, casts_and_crews: @movie.members, reviews: @movie.reviews}) %>
+<%= react_component('user/Movie', { user: current_user, 
+                                    movie: @movie, 
+                                    casts_and_crews: @movie.members, 
+                                    reviews: @movie.reviews, 
+                                    token: form_authenticity_token.to_s,
+                                    on_list: @on_list
+                                    }) %>

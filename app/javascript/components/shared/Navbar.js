@@ -1,6 +1,89 @@
 import React from "react";
-
 const Navbar = (props) => {
+  console.log(props.user);
+  const NavGuest = () => {
+    return (
+      <>
+        <a
+          href="/users/sign_up"
+          style={{ textDecoration: "none" }}
+          className="text-white mx-4"
+        >
+          {" "}
+          Join MovieDB{" "}
+        </a>
+
+        <a
+          href="/users/sign_in"
+          style={{ textDecoration: "none" }}
+          className="text-white me-5"
+        >
+          {" "}
+          Log In{" "}
+        </a>
+      </>
+    );
+  };
+
+  const NavUser = () => {
+    return (
+      <>
+        <div class="dropdown me-5">
+          <button style={{background:'none', border:'none', width:'8rem'}} role="buton" data-bs-toggle="dropdown" className={'d-flex justify-content-end'} aria-expanded="false"> 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="48"
+            class="bi bi-person-circle"
+            fill="white"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            <path
+              fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+            />
+          </svg>
+          </button>
+
+          <ul class="dropdown-menu   ms-4">
+            <li>
+              <a class="dropdown-item" href="/users/edit">
+                Profile
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href={`/favorites`}
+              >
+                Favorites
+              </a>
+            </li>
+            <li>
+              <form
+                accept-charset="UTF-8"
+                action="/users/sign_out"
+                method="post"
+              >
+                <input name="_method" type="hidden" value="delete" />
+                <input name="utf8" type="hidden" value="&#x2713;" />
+                <input
+                  name="authenticity_token"
+                  type="hidden"
+                  value={props.token}
+                />
+
+                <button class="dropdown-item" type="submit">
+                  Log Out
+                </button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </>
+    );
+  };
   return (
     <nav class="navbar navbar-expand-lg bg-dark">
       <div class="container-fluid mx-5">
@@ -34,10 +117,10 @@ const Navbar = (props) => {
                 People
               </a>
             </li>
-            <form role="search" style={{width:'30rem'}}>
+            <form role="search" style={{ width: "30rem" }}>
               <input
                 class="form-control mx-5 w-100"
-                style={{width:'28rem'}}
+                style={{ width: "28rem" }}
                 type="search"
                 placeholder="Search for a movie, person, director..."
                 aria-label="Search"
@@ -45,15 +128,7 @@ const Navbar = (props) => {
             </form>
           </ul>
           <div className="d-flex align-items-center">
-            <a href="/users/sign_up" style={{ textDecoration: "none" }} className="text-white mx-4">
-              {" "}
-              Join MovieDB{" "}
-            </a>
-
-            <a href="/users/sign_in" style={{ textDecoration: "none" }} className="text-white me-5">
-              {" "}
-              Log In{" "}
-            </a>
+            {props.user ? <NavUser /> : <NavGuest />}
           </div>
         </div>
       </div>

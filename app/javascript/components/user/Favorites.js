@@ -1,8 +1,9 @@
+
 import React from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
 import Pagination from "../shared/Pagination";
-const Homepage = (props) => {
+const Favorites = (props) => {
   console.log(props);
 
   const content = Array(props.pages)
@@ -81,4 +82,4 @@ const Homepage = (props) => {
   );
 };
 
-export default Homepage;
+export default Favorites;

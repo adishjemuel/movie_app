@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
+
+import "bootstrap-icons/font/bootstrap-icons.css";
 const Movie = (props) => {
   console.log(props);
   return (
     <div>
-      <Navbar user={props.user} />
+      <Navbar user={props.user} token={props.token} />
 
       <section
         class="my-5 w-full"
@@ -40,6 +42,37 @@ const Movie = (props) => {
                 {" "}
                 {props.movie.summary}{" "}
               </p>
+              <form
+                action={
+                  props.on_list ? `/favorites/${props.movie.id}` : "/favorites"
+                }
+                method="post"
+              >
+                {props.on_list && (
+                  <input name="_method" type="hidden" value="delete" />
+                )}
+                {props.on_list == false && (
+                  <input type="hidden" name="id" value={props.movie.id} />
+                )}
+                <input
+                  name="authenticity_token"
+                  type="hidden"
+                  value={props.token}
+                />
+                <input
+                  name="authenticity_token"
+                  type="hidden"
+                  value={props.token}
+                />
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary text-white text-center"
+                >
+                  {props.on_list
+                    ? "Remove From Your Watchlist"
+                    : "Add To Your Watchlist"}
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -99,11 +132,11 @@ const Movie = (props) => {
               </div>
               <div class="col-md-10">
                 <div class="card-body">
-                    {/* To be changed to username when added to db */}
-                  <h5 class="card-title">A review by {review.review_user.email}</h5>
-                  <p class="card-text">
-                    {review.body}
-                  </p>
+                  {/* To be changed to username when added to db */}
+                  <h5 class="card-title">
+                    A review by {review.review_user.email}
+                  </h5>
+                  <p class="card-text">{review.body}</p>
                   <p class="card-text">
                     <small class="text-muted">{review.created}</small>
                   </p>

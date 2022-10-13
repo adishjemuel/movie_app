@@ -1,1 +1,7 @@
-<%= react_component('user/Homepage', {movies: @movies, pages: @movies.total_pages, current_page: @movies.current_page, genres: @genres, user: current_user}) %>
+<%= react_component('user/Homepage', {movies: @movies, 
+                                      token: form_authenticity_token.to_s, 
+                                      pages: @total_pages, 
+                                      current_page: @movies.current_page, 
+                                      genres: @genres, 
+                                      user: current_user
+                                      })%>

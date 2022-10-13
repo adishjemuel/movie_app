@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
 
-const SignUp = (props) => {
+const Login = (props) => {
   console.log(props);
 
   return (
@@ -32,20 +32,18 @@ const SignUp = (props) => {
             </div>
           </div>
         </div>
-        <form class="col" action="/users" method="post">
+        <form class="col" action="/users/sign_in" method="post">
           <input name="utf8" type="hidden" value="&#x2713;" />
           <input name="authenticity_token" type="hidden" value={props.token} />
-          <input name="commit" type="hidden" value="Sign up" />
-          <h5 className="fw-semibold"> Sign Up for an account </h5>
-          <span class="text-muted">
+          <input name="commit" type="hidden" value="Log in" />
+          <h5 className="fw-semibold"> Login to your account </h5>
+          <span class="text-muted mb-3">
             {" "}
-            Signing up for an account is free and easy. Fill out the form below
-            to get started.{" "}
+            Make sure you enter the correct details that you have signed up. If
+            you do not have yet an account, signing up for an account is free
+            and easy.
+            <a href="/users/sign_up" style={{textDecoration:'none'}}> Click here </a> to get started
           </span>
-          <div class="mb-3 mt-2">
-            <label className="form-label">Username</label>
-            <input type="text" className="form-control" name="user[username]" />
-          </div>
 
           <div clasName="mb-3">
             <label for="exampleInputEmail1" class="form-label">
@@ -74,7 +72,7 @@ const SignUp = (props) => {
             />
           </div>
           <button type="submit" class="btn btn-primary mt-2">
-            Sign Up
+            Submit
           </button>
         </form>
       </section>
@@ -83,4 +81,4 @@ const SignUp = (props) => {
   );
 };
 
-export default SignUp;
+export default Login;

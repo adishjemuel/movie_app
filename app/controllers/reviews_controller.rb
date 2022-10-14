@@ -4,6 +4,8 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   
   before_action :set_review, only: %i[edit update destroy show] 
+
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   def new  
     @movie = Movie.find(params[:movie_id])
   end 
@@ -30,10 +32,11 @@ class ReviewsController < ApplicationController
       redirect_to root_path 
     end 
   end
-
+  
+  #Refactor and add success/failure message 
   def destroy 
-    # if @review.destroy 
-    # end
+    @movie = @review.movie
+    redirect_to @movie if @review.destroy
   end 
 
   private 
@@ -44,5 +47,9 @@ class ReviewsController < ApplicationController
 
   def set_review 
     @review = Review.find params[:id] 
+  end
+
+  def record_not_found 
+    redirect_to root_path 
   end
 end 

@@ -118,13 +118,16 @@ const Movie = (props) => {
         <h2 className="fw-normal mt-5"> Reviews </h2>
         <hr className="border border-1 border-dark opacity-100" />
         <div className="d-flex justify-content-end">
-          <a style={{textDecoration: 'none'}} href={`/movies/${props.movie.id}/reviews/new`}>
-          <span
-            class="badge rounded-pill text-bg-primary my-2 px-4 py-2 text-white"
-            style={{ cursor: "pointer" }}
+          <a
+            style={{ textDecoration: "none" }}
+            href={`/movies/${props.movie.id}/reviews/new`}
           >
-            Write A Review
-          </span>
+            <span
+              class="badge rounded-pill text-bg-primary my-2 px-4 py-2 text-white"
+              style={{ cursor: "pointer" }}
+            >
+              Write A Review
+            </span>
           </a>
         </div>
         {props.reviews.map((review) => (
@@ -140,14 +143,58 @@ const Movie = (props) => {
               <div class="col-md-10">
                 <div class="card-body">
                   {/* To be changed to username when added to db */}
-                  <h5 class="card-title">
-                    {review.title}
-                  </h5>
-                  <span class="text-muted fw-semibold"> {review.review_user.username} </span>
+                  <h5 class="card-title">{review.title}</h5>
+                  <span class="text-muted fw-semibold">
+                    {" "}
+                    {review.review_user.username}{" "}
+                  </span>
                   <p class="card-text mt-2">{review.body}</p>
                   <p class="card-text">
                     <small class="text-muted">{review.created}</small>
                   </p>
+
+                  {props.user && props.user.username == review.review_user.username && (
+                    <div class="dropdown">
+                      <button
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        Manage
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a
+                            class="dropdown-item"
+                            href={`/reviews/${review.id}/edit`}
+                          >
+                            Edit
+                          </a>
+                        </li>
+                        <li>
+                          <form
+                            action={`/reviews/${review.id}`}
+                            method="post"
+                          >
+                            <input
+                              name="_method"
+                              type="hidden"
+                              value="delete"
+                            />
+                            <input
+                              name="authenticity_token"
+                              type="hidden"
+                              value={props.token}
+                            />
+                            <button class="dropdown-item" type="submit">
+                              Delete
+                            </button>
+                          </form>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

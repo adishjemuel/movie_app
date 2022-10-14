@@ -141,9 +141,10 @@ const Movie = (props) => {
                 <div class="card-body">
                   {/* To be changed to username when added to db */}
                   <h5 class="card-title">
-                    A review by {review.review_user.email}
+                    {review.title}
                   </h5>
-                  <p class="card-text">{review.body}</p>
+                  <span class="text-muted fw-semibold"> {review.review_user.username} </span>
+                  <p class="card-text mt-2">{review.body}</p>
                   <p class="card-text">
                     <small class="text-muted">{review.created}</small>
                   </p>

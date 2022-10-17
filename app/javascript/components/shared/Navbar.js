@@ -117,13 +117,14 @@ const Navbar = (props) => {
                 People
               </a>
             </li>
-            <form role="search" style={{ width: "30rem" }}>
+            <form role="search" style={{ width: "30rem" }} action="/movies" method="get">
               <input
                 class="form-control mx-5 w-100"
                 style={{ width: "28rem" }}
                 type="search"
-                placeholder="Search for a movie, person, director..."
+                placeholder="Search for any title of movies"
                 aria-label="Search"
+                name="q[title_cont]"
               />
             </form>
           </ul>

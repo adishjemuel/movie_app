@@ -30,15 +30,26 @@ const Homepage = (props) => {
         <section className="text-center">
           <h1> All Type Of Movies</h1>
         </section>
-        <section className="ms-3">
-          <span class="badge rounded-pill text-bg-dark px-5 py-2 me-2 mt-2">
-            {" "}
-            All{" "}
-          </span>
+        <section className="ms-3 d-flex flex-row flex-wrap">
+          <form action="/movies" method="get">
+            <button
+              class="badge rounded-pill text-bg-dark px-5 py-2 me-2 mt-2"
+              type="submit"
+            >
+              {" "}
+              All{" "}
+            </button>
+          </form>
           {props.genres.map((genre) => (
-            <span class="badge rounded-pill text-bg-dark px-5 py-2 me-2 mt-2">
-              {genre.type}
-            </span>
+            <form action="/movies" method="get">
+            <input name="genre[type]" value={genre.type} type="hidden"/>
+              <button
+                class="badge rounded-pill text-bg-dark px-5 py-2 me-2 mt-2"
+                type="submit"
+              >
+                {genre.type}
+              </button>
+            </form>
           ))}
         </section>
         <div className="container row row-cols-1 row-cols-md-5 g-4 pt-4 d-flex justify-content-center overflow-hidden">

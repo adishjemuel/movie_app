@@ -4,10 +4,10 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, only: %i[update destroy create]
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
-  def index
-    @q = Movie.ransack(params[:q])
+  def index 
+    sort_by_genre
+    @q = @movies_genre.ransack(params[:q])
     @movies = @q.result.page params[:page]  
-    @total_pages = @movies.total_pages
     @genres = Genre.all
   end
 
@@ -39,6 +39,14 @@ class MoviesController < ApplicationController
   
   private
 
+  def sort_by_genre
+    if params[:genre].present? && params[:genre][:type].present?
+      @movies_genre = Movie.joins(:genres).where(genres: { type: params[:genre][:type]})
+    else 
+      @movies_genre = Movie.where(nil)
+    end
+  end
+  
   def set_movie
     @movie = Movie.includes(reviews: :user).find params[:id]
   end
@@ -50,5 +58,6 @@ class MoviesController < ApplicationController
   def record_not_found 
     redirect_to root_path 
   end
+
   
 end

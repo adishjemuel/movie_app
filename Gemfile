@@ -35,6 +35,8 @@ gem 'cancancan', '~> 1.15'
 
 #Image
 gem 'shrine', '~> 2.6', '>= 2.6.1'
+gem "paperclip", "~> 6.0.0"
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

@@ -5,6 +5,7 @@ class Review < ApplicationRecord
   # attribute :user, :string
 
   attribute :review_user 
+  attribute :review_avatar
 
   attribute :created 
 
@@ -13,7 +14,11 @@ class Review < ApplicationRecord
   end
 
   def review_user
-    user 
+    user  
   end 
+
+  def review_avatar
+    user.avatar.url 
+  end
 
 end

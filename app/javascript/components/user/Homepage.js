@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
 import Pagination from "../shared/Pagination";
+import ReactStars from "react-rating-stars-component";
 const Homepage = (props) => {
   console.log(props);
 
@@ -24,7 +25,7 @@ const Homepage = (props) => {
     ));
   return (
     <div>
-      <Navbar user={props.user} token={props.token}/>
+      <Navbar user={props.user} token={props.token} />
       <div className="container  py-2 px-2">
         <section className="text-center">
           <h1> All Type Of Movies</h1>
@@ -59,7 +60,7 @@ const Homepage = (props) => {
                   <img
                     src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
                     className="card-img-top"
-                    style={{ height: "18rem" }}
+                    style={{ height: "16rem" }}
                     alt="..."
                   />
                   <div class="card-body text-body">
@@ -68,6 +69,15 @@ const Homepage = (props) => {
                       {" "}
                       {movie.formatted_release_date}{" "}
                     </span>
+                    <p class="card-text">
+                      <ReactStars
+                        count={5}
+                        value={movie.average_rating}
+                        size={24}
+                        activeColor="#ffd700"
+                        edit={false}
+                      />
+                    </p>
                   </div>
                 </div>
               </a>

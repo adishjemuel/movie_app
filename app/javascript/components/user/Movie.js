@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
-
+import ReactStars from "react-rating-stars-component";
 const Movie = (props) => {
   console.log(props);
   return (
@@ -152,49 +152,56 @@ const Movie = (props) => {
                   <p class="card-text">
                     <small class="text-muted">{review.created}</small>
                   </p>
-
-                  {props.user && props.user.username == review.review_user.username && (
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        Manage
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a
-                            class="dropdown-item"
-                            href={`/reviews/${review.id}/edit`}
-                          >
-                            Edit
-                          </a>
-                        </li>
-                        <li>
-                          <form
-                            action={`/reviews/${review.id}`}
-                            method="post"
-                          >
-                            <input
-                              name="_method"
-                              type="hidden"
-                              value="delete"
-                            />
-                            <input
-                              name="authenticity_token"
-                              type="hidden"
-                              value={props.token}
-                            />
-                            <button class="dropdown-item" type="submit">
-                              Delete
-                            </button>
-                          </form>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
+                  <ReactStars
+                    count={5}
+                    value={review.score}
+                    size={24}
+                    activeColor="#ffd700"
+                    edit={false}
+                  />
+                  {props.user &&
+                    props.user.username == review.review_user.username && (
+                      <div class="dropdown">
+                        <button
+                          class="btn btn-secondary dropdown-toggle"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          Manage
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a
+                              class="dropdown-item"
+                              href={`/reviews/${review.id}/edit`}
+                            >
+                              Edit
+                            </a>
+                          </li>
+                          <li>
+                            <form
+                              action={`/reviews/${review.id}`}
+                              method="post"
+                            >
+                              <input
+                                name="_method"
+                                type="hidden"
+                                value="delete"
+                              />
+                              <input
+                                name="authenticity_token"
+                                type="hidden"
+                                value={props.token}
+                              />
+                              <button class="dropdown-item" type="submit">
+                                Delete
+                              </button>
+                            </form>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
                 </div>
               </div>
             </div>

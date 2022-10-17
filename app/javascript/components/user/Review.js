@@ -5,7 +5,7 @@ import ReactStars from "react-rating-stars-component";
 
 const Review = (props) => { 
    
-  const [rating, setRating] = useState(0)
+  const [rating, setRating] = useState(1)
   const [title, setTitle] = useState("")
   const ratingChanged = newRating =>  setRating(newRating)
   useEffect(() => {

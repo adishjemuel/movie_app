@@ -1,4 +1,3 @@
-
 import React from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
@@ -25,10 +24,10 @@ const Favorites = (props) => {
     ));
   return (
     <div>
-      <Navbar user={props.user} token={props.token}/>
+      <Navbar user={props.user} token={props.token} type="favorites" />
       <div className="container  py-2 px-2">
         <section className="text-center">
-          <h1> All Type Of Movies</h1>
+          <h1> Your Watchlist</h1>
         </section>
         <section className="ms-3">
           <span class="badge rounded-pill text-bg-dark px-5 py-2 me-2 mt-2">
@@ -48,30 +47,60 @@ const Favorites = (props) => {
               style={{ height: "25rem" }}
               key={movie.id}
             >
-              <a
-                href={`/movies/${movie.id}`}
-                style={{
-                  display: "block",
-                  height: "100%",
-                  textDecoration: "none",
-                }}
-              >
-                <div className="card h-100" style={{ cursor: "pointer" }}>
+              <div className="card h-100">
+                <a
+                  href={`/movies/${movie.id}`}
+                  style={{
+                    display: "block",
+                    height: "100%",
+                    textDecoration: "none",
+                  }}
+                >
                   <img
                     src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
                     className="card-img-top"
                     style={{ height: "18rem" }}
                     alt="..."
                   />
-                  <div class="card-body text-body">
-                    <h5 class="card-title">{movie.title} </h5>
-                    <span class="card-text text-muted">
-                      {" "}
-                      {movie.formatted_release_date}{" "}
-                    </span>
+                </a>
+                <div class="card-body text-body">
+                  <h5 class="card-title">{movie.title} </h5>
+
+                  <div class="dropdown py-2">
+                    <button
+                      class="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Manage
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          href={`/movies/${movie.id}/reviews/new`}
+                        >
+                          Add Reviews
+                        </a>
+                      </li>
+                      <li>
+                        <form action={`/favorites/${movie.id}`} method="post">
+                          <input name="_method" type="hidden" value="delete" />
+                          <input
+                            name="authenticity_token"
+                            type="hidden"
+                            value={props.token}
+                          />
+                          <button class="dropdown-item" type="submit">
+                            Remove
+                          </button>
+                        </form>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
           ))}
         </div>

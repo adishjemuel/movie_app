@@ -129,7 +129,7 @@ const Movie = (props) => {
               Write A Review
             </span>
           </a>
-        </div>
+        </div>  
         {props.reviews.map((review) => (
           <div class="card mb-3" key={review.id}>
             <div class="row g-0">
@@ -143,7 +143,53 @@ const Movie = (props) => {
               <div class="col-md-10">
                 <div class="card-body">
                   {/* To be changed to username when added to db */}
-                  <h5 class="card-title">{review.title}</h5>
+                  <div className="d-flex justify-content-between">
+                    <h5 class="card-title">{review.title}</h5>
+
+                    {props.user &&
+                      props.user.username == review.review_user.username && (
+                        <div class="dropdown ms-5">
+                          <button
+                            class="btn btn-secondary dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            Manage
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a
+                                class="dropdown-item"
+                                href={`/reviews/${review.id}/edit`}
+                              >
+                                Edit
+                              </a>
+                            </li>
+                            <li>
+                              <form
+                                action={`/reviews/${review.id}`}
+                                method="post"
+                              >
+                                <input
+                                  name="_method"
+                                  type="hidden"
+                                  value="delete"
+                                />
+                                <input
+                                  name="authenticity_token"
+                                  type="hidden"
+                                  value={props.token}
+                                />
+                                <button class="dropdown-item" type="submit">
+                                  Delete
+                                </button>
+                              </form>
+                            </li>
+                          </ul>
+                        </div>
+                      )}
+                  </div>
                   <span class="text-muted fw-semibold">
                     {" "}
                     {review.review_user.username}{" "}
@@ -159,49 +205,6 @@ const Movie = (props) => {
                     activeColor="#ffd700"
                     edit={false}
                   />
-                  {props.user &&
-                    props.user.username == review.review_user.username && (
-                      <div class="dropdown">
-                        <button
-                          class="btn btn-secondary dropdown-toggle"
-                          type="button"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          Manage
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li>
-                            <a
-                              class="dropdown-item"
-                              href={`/reviews/${review.id}/edit`}
-                            >
-                              Edit
-                            </a>
-                          </li>
-                          <li>
-                            <form
-                              action={`/reviews/${review.id}`}
-                              method="post"
-                            >
-                              <input
-                                name="_method"
-                                type="hidden"
-                                value="delete"
-                              />
-                              <input
-                                name="authenticity_token"
-                                type="hidden"
-                                value={props.token}
-                              />
-                              <button class="dropdown-item" type="submit">
-                                Delete
-                              </button>
-                            </form>
-                          </li>
-                        </ul>
-                      </div>
-                    )}
                 </div>
               </div>
             </div>

@@ -17,9 +17,11 @@ class FavoritesController < ApplicationController
   end
   
   def destroy 
+    p 'etits'
     @favorite = Favorite.find_by movie_id: @movie.id, user_id: current_user.id
 
     if @favorite.destroy 
+      p 'tnginamo'
       redirect_to @movie 
     else 
       redirect_to root_path 

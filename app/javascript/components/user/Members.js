@@ -24,7 +24,7 @@ const Members = (props) => {
     ));
   return (
     <div>
-      <Navbar user={props.user} token={props.token} type="movies"/>
+      <Navbar user={props.user} token={props.token} type="members"/>
       <div className="container  py-2 px-2">
         <section className="text-center">
           <h1>Popular People</h1>

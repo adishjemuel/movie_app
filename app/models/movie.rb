@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
  
-  has_attached_file :cover
+  has_attached_file :cover, default_url: "/images/movies/unknown.jpeg"
   validates_attachment_content_type :cover, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   paginates_per 20

@@ -5,7 +5,7 @@ const Navbar = (props) => {
   useEffect(() => {
     if (props.type) setSearchType(props.type);
   }, []);
-
+ console.log(props.type)
   const SearchMovies = () => {
     return (
       <form
@@ -39,7 +39,7 @@ const Navbar = (props) => {
           type="search"
           placeholder="Search for the actor, actress, director, producer, etc .."
           aria-label="Search"
-          name="q[first_name_or_last_namecont]"
+          name="q[first_name_or_last_name_cont]"
         />
       </form>
     );

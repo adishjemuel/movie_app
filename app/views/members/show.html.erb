@@ -1,0 +1,5 @@
+<%= react_component('user/Member', { user: current_user, 
+                                     member: @member, 
+                                     movies: @member.movies,
+                                     token: form_authenticity_token.to_s,
+                                    }) %>

@@ -68,17 +68,13 @@ const Members = (props) => {
               >
                 <div className="card h-100" style={{ cursor: "pointer" }}>
                   <img
-                    src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
+                    src={member.picture_url}
                     className="card-img-top"
                     style={{ height: "16rem" }}
                     alt="..."
                   />
                   <div class="card-body text-body">
                     <h5 class="card-title">{member.first_name} {member.last_name} </h5>
-                    <span class="card-text text-muted">
-                      {" "}
-                      {/* {member.role}{" "} */}
-                    </span>
                   </div>
                 </div>
               </a>

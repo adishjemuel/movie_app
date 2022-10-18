@@ -92,7 +92,7 @@ const Movie = (props) => {
                   style={{ cursor: "pointer", width: "8rem", height: "5rem" }}
                 >
                   <img
-                    src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
+                    src={cast.picture_url}
                     className="card-img-top"
                     alt="..."
                   />
@@ -136,7 +136,6 @@ const Movie = (props) => {
               </div>
               <div class="col-md-10">
                 <div class="card-body">
-                  {/* To be changed to username when added to db */}
                   <div className="d-flex justify-content-between">
                     <h5 class="card-title">{review.title}</h5>
 

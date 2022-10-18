@@ -7,7 +7,6 @@ class MembersController < ApplicationController
 
   def show 
     @member = Member.includes(:movies).find params[:id]
-    @movies = @member.movies 
   end
 
 end

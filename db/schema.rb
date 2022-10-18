@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20221017064126) do
+ActiveRecord::Schema.define(version: 20221018055426) do
 
   create_table "casts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.bigint "movie_id"
     t.bigint "member_id"
+    t.integer "role"
     t.index ["member_id"], name: "index_casts_on_member_id"
     t.index ["movie_id"], name: "index_casts_on_movie_id"
   end
@@ -35,7 +36,6 @@ ActiveRecord::Schema.define(version: 20221017064126) do
     t.string "last_name"
     t.datetime "birthday"
     t.integer "gender"
-    t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

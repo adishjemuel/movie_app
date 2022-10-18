@@ -77,7 +77,7 @@ const Members = (props) => {
                     <h5 class="card-title">{member.first_name} {member.last_name} </h5>
                     <span class="card-text text-muted">
                       {" "}
-                      {member.role}{" "}
+                      {/* {member.role}{" "} */}
                     </span>
                   </div>
                 </div>

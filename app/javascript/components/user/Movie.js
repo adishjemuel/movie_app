@@ -10,23 +10,17 @@ const Movie = (props) => {
       <section
         class="my-5 w-full"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(0 ,0 ,0, 0.5), rgba(0, 0, 0, 0.5)),url(https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg)",
+          backgroundImage: `linear-gradient(rgba(0 ,0 ,0, 0.5), rgba(0, 0, 0, 0.5)),url(${props.movie.cover_url}`,
           height: "23rem",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          //   filter: 'blur(2px)'
-          //   position: 'relative'
         }}
       >
         <div class="container">
           <div class="row pt-4">
             <div class="col-4" style={{ width: "15rem" }}>
-              <img
-                src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
-                className="img-fluid"
-              />
+              <img src={props.movie.cover_url} className="img-fluid" />
             </div>
             <div class="col-8 text-light d-flex flex-column align-items-start">
               <h1 className="fw-bold">{props.movie.title} </h1>
@@ -129,7 +123,7 @@ const Movie = (props) => {
               Write A Review
             </span>
           </a>
-        </div>  
+        </div>
         {props.reviews.map((review) => (
           <div class="card mb-3" key={review.id}>
             <div class="row g-0">

@@ -1,4 +1,7 @@
 class Movie < ApplicationRecord
+ 
+  has_attached_file :cover
+  validates_attachment_content_type :cover, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   paginates_per 20
   has_many :reviews
@@ -13,7 +16,12 @@ class Movie < ApplicationRecord
   has_many :genres, through: :movie_genres, dependent: :destroy
   
   attribute :formatted_release_date, :string 
-  attribute :average_rating, :integer
+  attribute :average_rating, :integer 
+  attribute :cover_url, :string 
+
+  def cover_url 
+    cover.url 
+  end
 
   def formatted_release_date 
     release.respond_to?(:strftime) ? release.strftime("%B %d, %Y"): ""

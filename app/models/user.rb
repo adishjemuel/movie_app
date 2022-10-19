@@ -12,5 +12,11 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :movies, through: :favorites, dependent: :destroy
 
-  enum role: { user: 0, admin: 1 }
+  enum role: { user: 0, admin: 1 } 
+
+  attribute :avatar_url 
+
+  def avatar_url 
+    avatar.url 
+  end
 end

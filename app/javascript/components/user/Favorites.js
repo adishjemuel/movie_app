@@ -64,9 +64,9 @@ const Favorites = (props) => {
                   />
                 </a>
                 <div class="card-body text-body">
-                  <h5 class="card-title">{movie.title} </h5>
+                  <h6 class="card-title fw-bold">{movie.title} </h6>
 
-                  <div class="dropdown py-2">
+                  <div class="dropdown py-1">
                     <button
                       class="btn btn-secondary dropdown-toggle"
                       type="button"

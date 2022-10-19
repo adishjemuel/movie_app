@@ -15,7 +15,7 @@ const Review = (props) => {
   },[])
   return (
     <div>
-      <Navbar user={props.user} />
+      <Navbar user={props.user} token={props.token}/>
       <section className="container row py-4">
         <div className="col-4 ms-5">
           <div class="card mb-3" style={{ height: "35rem" }}>

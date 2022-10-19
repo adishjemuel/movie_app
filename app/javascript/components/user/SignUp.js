@@ -7,7 +7,7 @@ const SignUp = (props) => {
 
   return (
     <div>
-      <Navbar user={props.user} />
+      <Navbar user={props.user}/>
       <section className="container row py-4">
         <div className="col-3 ms-5">
           <div class="card text mb-3">

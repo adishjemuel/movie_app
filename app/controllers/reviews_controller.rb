@@ -6,6 +6,9 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: %i[edit update destroy show] 
 
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
+  authorize_resource 
+  
   def new  
     @movie = Movie.find(params[:movie_id])
   end 

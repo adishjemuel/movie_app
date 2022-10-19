@@ -8,5 +8,10 @@ Rails.application.routes.draw do
   end
   resources :movies, only: [:index, :show]
   resources :favorites, only: [:index, :create, :destroy]
-  resources :members, only: [:index, :show]
+  resources :members, only: [:index, :show] 
+
+
+  namespace :admin do 
+    resources :movies 
+  end
 end

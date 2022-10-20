@@ -5,7 +5,7 @@ const Navbar = (props) => {
   useEffect(() => {
     if (props.type) setSearchType(props.type);
   }, []);
- console.log(props.type)
+  console.log(props.type);
   const SearchMovies = () => {
     return (
       <form
@@ -96,6 +96,13 @@ const Navbar = (props) => {
           </button>
 
           <ul class="dropdown-menu   ms-4">
+            {props.user && props.user.role == "admin" && (
+              <li>
+                <a className="dropdown-item" href="/admin/movies">
+                  Admin Dashboard
+                </a>
+              </li>
+            )}
             <li>
               <a class="dropdown-item" href="/users/edit">
                 Profile

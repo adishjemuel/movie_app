@@ -23,8 +23,10 @@ const Favorites = (props) => {
       </form>
     ));
   return (
-    <div>
-      <Navbar user={props.user} token={props.token} type="favorites" />
+    <div className="d-flex flex-column">
+      <div>
+        <Navbar user={props.user} token={props.token} type="movies" />
+      </div>
       <div className="container  py-2 px-2">
         <section className="text-center">
           <h1> Your Watchlist</h1>
@@ -41,68 +43,74 @@ const Favorites = (props) => {
           ))}
         </section>
         <div className="container row row-cols-1 row-cols-md-5 g-4 pt-4 d-flex justify-content-center overflow-hidden">
-          {props.movies.map((movie) => (
-            <div
-              className="col mt-4 pe-4"
-              style={{ height: "25rem" }}
-              key={movie.id}
-            >
-              <div className="card h-100">
-                <a
-                  href={`/movies/${movie.id}`}
-                  style={{
-                    display: "block",
-                    height: "100%",
-                    textDecoration: "none",
-                  }}
-                >
-                  <img
-                    src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
-                    className="card-img-top"
-                    style={{ height: "18rem" }}
-                    alt="..."
-                  />
-                </a>
-                <div class="card-body text-body">
-                  <h6 class="card-title fw-bold">{movie.title} </h6>
+          <img src="/images/fill.jpg" className="img-fluid" style={{width:'25rem'}}/>
+          {props.movies.length > 0 &&
+            props.movies.map((movie) => (
+              <div
+                className="col mt-4 pe-4"
+                style={{ height: "25rem" }}
+                key={movie.id}
+              >
+                <div className="card h-100">
+                  <a
+                    href={`/movies/${movie.id}`}
+                    style={{
+                      display: "block",
+                      height: "100%",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <img
+                      src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
+                      className="card-img-top"
+                      style={{ height: "18rem" }}
+                      alt="..."
+                    />
+                  </a>
+                  <div class="card-body text-body">
+                    <h6 class="card-title fw-bold">{movie.title} </h6>
 
-                  <div class="dropdown py-1">
-                    <button
-                      class="btn btn-secondary dropdown-toggle"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Manage
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          href={`/movies/${movie.id}/reviews/new`}
-                        >
-                          Add Reviews
-                        </a>
-                      </li>
-                      <li>
-                        <form action={`/favorites/${movie.id}`} method="post">
-                          <input name="_method" type="hidden" value="delete" />
-                          <input
-                            name="authenticity_token"
-                            type="hidden"
-                            value={props.token}
-                          />
-                          <button class="dropdown-item" type="submit">
-                            Remove
-                          </button>
-                        </form>
-                      </li>
-                    </ul>
+                    <div class="dropdown py-1">
+                      <button
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        Manage
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a
+                            class="dropdown-item"
+                            href={`/movies/${movie.id}/reviews/new`}
+                          >
+                            Add Reviews
+                          </a>
+                        </li>
+                        <li>
+                          <form action={`/favorites/${movie.id}`} method="post">
+                            <input
+                              name="_method"
+                              type="hidden"
+                              value="delete"
+                            />
+                            <input
+                              name="authenticity_token"
+                              type="hidden"
+                              value={props.token}
+                            />
+                            <button class="dropdown-item" type="submit">
+                              Remove
+                            </button>
+                          </form>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
       {props.pages > 1 ? <Pagination content={content} /> : null}

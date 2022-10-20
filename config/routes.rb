@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
 
   namespace :admin do 
-    resources :movies 
+    get '/dashboard', to: 'home#index'
+    resources :movies
   end
 end

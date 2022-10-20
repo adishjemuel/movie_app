@@ -140,7 +140,7 @@ const Movie = (props) => {
                     <h5 class="card-title">{review.title}</h5>
 
                     {props.user &&
-                      props.user.username == review.review_user.username && (
+                      (props.user.username == review.review_user.username || props.user.role == "admin") && (
                         <div class="dropdown ms-5">
                           <button
                             class="btn btn-secondary dropdown-toggle"

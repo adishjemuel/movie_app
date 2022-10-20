@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = (props) => {
   return (
-    <footer class="text-center text-lg-start bg-dark text-white pt-4 mt-5 position-absolute w-100 mt-auto">
+    <footer class="text-center text-lg-start bg-dark text-white pt-4 mt-5 w-100 mt-auto">
       <section class="p-1">
         <div class="container text-center text-md-start mt-5">
           <div class="row mt-3">

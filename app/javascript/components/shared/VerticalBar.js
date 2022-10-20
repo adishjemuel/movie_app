@@ -27,26 +27,26 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Movie Data By Genres",
+      text: "Total Number Of Movies",
     },
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Movies",
-      data: [1, 2, 3, 4, 5, 6, 7, 8,9],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-  ],
-};
 const VerticalBar = (props) => {
+  const labels = props.labels.map((g) => g.type);
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Movies Count",
+        data: props.labels.map((g) => g.movies_count),
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
+  console.log(props.labels)
   return <Bar options={options} data={data} />;
 };
 
-
-export default VerticalBar
+export default VerticalBar;

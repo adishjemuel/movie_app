@@ -98,7 +98,7 @@ const Navbar = (props) => {
           <ul class="dropdown-menu   ms-4">
             {props.user && props.user.role == "admin" && (
               <li>
-                <a className="dropdown-item" href="/admin/movies">
+                <a className="dropdown-item" href="/admin/dashboard">
                   Admin Dashboard
                 </a>
               </li>

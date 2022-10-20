@@ -2,12 +2,12 @@ import React from "react";
 
 const TopBoard = (props) => {
   return (
-    <section className="my-5 mx-5"
+    <section className="mt-3 mx-5"
     >
-        <h1> Hello Admin</h1> 
+        <h1 className="fw-bold"> Admin Dashboard</h1> 
         <span class="text-muted"> Welcome back ! </span>
 
-        <h4 className="my-4"> Overview </h4>
+        <h4 className="mt-3 fst-italic"> Overview </h4>
 
     </section>
   );

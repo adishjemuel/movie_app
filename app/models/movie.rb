@@ -18,7 +18,7 @@ class Movie < ApplicationRecord
   attribute :formatted_release_date, :string 
   attribute :average_rating, :integer 
   attribute :cover_url, :string 
-
+  attribute :genres_type 
   def cover_url 
     cover.url 
   end
@@ -35,5 +35,9 @@ class Movie < ApplicationRecord
       total_rating+=(keys*value) 
     end 
     scores.length == 0 ? 0  : total_rating/scores.length
+  end
+
+  def genres_type 
+    genres.pluck(:type)
   end
 end

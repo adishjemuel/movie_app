@@ -16,7 +16,7 @@ const Dashboard = (props) => {
             <TopBoard/>
           </div>
           <div className="ms-4 mb-5 container align-self-center">
-            <VerticalBar genres={props.genres} labels={props.genres} />
+            <VerticalBar genres={props.genres} labels={props.genres}/>
           </div>
         </div>
       </div>

@@ -15,8 +15,15 @@ class User < ApplicationRecord
   enum role: { user: 0, admin: 1 } 
 
   attribute :avatar_url 
+  attribute :avatar_name
 
   def avatar_url 
     avatar.url 
+  end 
+
+  def avatar_name 
+    avatar.original_filename 
   end
+
+
 end

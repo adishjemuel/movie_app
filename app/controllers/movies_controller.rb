@@ -35,10 +35,6 @@ class MoviesController < ApplicationController
     @movie = Movie.includes(reviews: :user).find params[:id]
   end
 
-  def movie_params 
-    params.require(:movie).permit(:title, :summary, :release, :trailer_url)
-  end
-
   def record_not_found 
     redirect_to root_path 
   end

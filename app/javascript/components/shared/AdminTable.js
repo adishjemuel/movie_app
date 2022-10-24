@@ -17,6 +17,7 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
@@ -147,14 +148,69 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       )}
 
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+      {numSelected > 1 ? (
+        <form
+          action={`/admin/${props.header.toLowerCase()}/${props.selected[0]}`}
+          method="post"
+        >
+          <input name="movies[ids]" type="hidden" value={props.selected} />
+          <input name="authenticity_token" type="hidden" value={props.token} />
+
+          <input name="_method" type="hidden" value="delete" />
+          <button
+            type="submit"
+            style={{
+              background: "none",
+              border: "none",
+              textDecoration: "none",
+            }}
+          >
+            <Tooltip title="Delete">
+              <IconButton>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          </button>
+        </form>
+      ) : numSelected == 1 ? (
+        <>
+          <form
+            action={`/admin/${props.header.toLowerCase()}/${props.selected[0]}`}
+            method="post"
+          >
+            <input name="movies[ids]" type="hidden" value={props.selected} />
+            <input
+              name="authenticity_token"
+              type="hidden"
+              value={props.token}
+            />
+
+            <input name="_method" type="hidden" value="delete" />
+            <button
+              type="submit"
+              style={{
+                background: "none",
+                border: "none",
+                textDecoration: "none",
+              }}
+            >
+              <Tooltip title="Delete">
+                <IconButton>
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            </button>
+          </form>
+          <a href={`/admin/${props.header.toLowerCase()}/${props.selected[0]}/edit`} style={{background:"none", border:"none", textDecoration: "none"}}>
+          <Tooltip title="Edit">
+            <IconButton>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          </a>
+        </>
       ) : (
-        <Tooltip title="Filter list">
+        <Tooltip title="Select only one to edit, select one or more than one to delete">
           <IconButton>
             <FilterListIcon />
           </IconButton>
@@ -169,25 +225,25 @@ EnhancedTableToolbar.propTypes = {
 };
 
 const Row = (props) => {
-  console.log(props);
-
   if (props.item.type == "normal") {
     return <> {props.data[props.item.id]} </>;
   }
   return (
     <>
       {props.data[props.item.id].length > 0 ? (
-        <div className="row ms-1">
+        <div className="row gy-3 ms-1">
           {props.data[props.item.id].map((item) => (
-            <button className="badge rounded-pill text-bg-dark col-3 mt-2 me-1" key={item}>
+            <button
+              className="badge rounded-pill text-bg-dark col-3 me-2 px-2 py-1"
+              key={item}
+            >
               {" "}
               {item}{" "}
             </button>
           ))}
         </div>
       ) : (
-        <button className="badge rounded-pill text-bg-dark ms-1 me-2">
-          {" "}
+        <button className="badge rounded-pill text-bg-dark ms-1 me-2 col-3 px-2 py-1">
           No Genre{" "}
         </button>
       )}
@@ -199,8 +255,7 @@ const AdminTable = (props) => {
   const [orderBy, setOrderBy] = useState("title");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
-  const [dense, setDense] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -210,7 +265,7 @@ const AdminTable = (props) => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = props.data.map((n) => n.title);
+      const newSelected = props.data.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -234,6 +289,8 @@ const AdminTable = (props) => {
       );
     }
 
+    console.log(newSelected);
+
     setSelected(newSelected);
   };
 
@@ -243,6 +300,7 @@ const AdminTable = (props) => {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
+    console.log(rowsPerPage);
     setPage(0);
   };
 
@@ -252,21 +310,21 @@ const AdminTable = (props) => {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - props.data.length) : 0;
 
-  console.log(props.columns);
-  console.log(props.data);
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar
           numSelected={selected.length}
           header={props.header}
+          token={props.token}
+          selected={selected}
         />
 
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
+            size={"medium"}
           >
             <EnhancedTableHead
               columns={props.columns}
@@ -283,13 +341,13 @@ const AdminTable = (props) => {
               {stableSort(props.data, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.title);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.title)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -324,7 +382,7 @@ const AdminTable = (props) => {
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 53 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />

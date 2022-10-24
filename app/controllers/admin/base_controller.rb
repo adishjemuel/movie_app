@@ -2,7 +2,7 @@ class Admin::BaseController < ApplicationController
   protect_from_forgery with: :exception
   
   rescue_from CanCan::AccessDenied, :with => :not_allowed
-  
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   def current_ability
     controller_name_segments = params[:controller].split('/')
     controller_name_segments.pop
@@ -13,5 +13,8 @@ class Admin::BaseController < ApplicationController
   def not_allowed 
     redirect_to root_path 
   end
-  
+
+  def record_not_found 
+    redirect_to admin_dashboard_url
+  end
 end

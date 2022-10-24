@@ -1,36 +1,23 @@
+
 import React from "react";
 import VerticalNav from "../shared/VerticalNav";
 import TopBoard from "../shared/TopBoard";
 import AdminTable from "../shared/AdminTable";
 
-const Movies = (props) => {
+const Genres = (props) => {
   const columns = [
     {
-      id: "title",
+      id: "id",
       numeric: false,
       disablePadding: true,
-      label: "Title",
+      label: "ID",
       type: "normal",
     },
     {
-      id: "formatted_release_date",
+      id: "type",
       numeric: false,
       disablePadding: false,
-      label: "Release",
-      type: "normal",
-    },
-    {
-      id: "genres_type",
-      disablePadding: false,
-      numeric: false,
-      label: "Genre(s)",
-      type: "pill",
-    },
-    {
-      id: "average_rating",
-      numeric: true,
-      disablePadding: false,
-      label: "Average Rating",
+      label: "Type",
       type: "normal",
     },
   ];
@@ -40,7 +27,7 @@ const Movies = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="movies" />
+          <VerticalNav user={props.user} currentPage="genres" />
         </div>
 
         <div
@@ -50,15 +37,14 @@ const Movies = (props) => {
           <div className="d-flex justify-content-end">
             <button className="btn btn-primary w-20 me-2">
               {" "}
-              Create New Movie{" "}
+              Create New Genre{" "}
             </button>
           </div>
           <div className="mt-4 container align-self-center">
             <AdminTable
-              data={props.movies}
+              data={props.genres}
               columns={columns}
-              header={"Movies"}
-              token={props.token}
+              header={"Genre(s)"}
             />
           </div>
         </div>
@@ -67,4 +53,4 @@ const Movies = (props) => {
   );
 };
 
-export default Movies;
+export default Genres

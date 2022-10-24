@@ -17,10 +17,16 @@ class Movie < ApplicationRecord
   
   attribute :formatted_release_date, :string 
   attribute :average_rating, :integer 
-  attribute :cover_url, :string 
+  attribute :cover_url, :string  
+  attribute :cover_name, :string
   attribute :genres_type 
+
   def cover_url 
     cover.url 
+  end
+
+  def cover_name 
+    cover.original_filename 
   end
 
   def formatted_release_date 

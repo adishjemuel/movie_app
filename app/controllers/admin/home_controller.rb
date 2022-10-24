@@ -4,6 +4,8 @@ class Admin::HomeController < Admin::BaseController
 
   def index 
     @genres = Genre.all
+    @users_count = User.where(role: User.roles[:user]).count 
+    @reviews_count = Review.all.count
   end 
 
 end

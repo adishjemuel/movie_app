@@ -73,7 +73,6 @@ const MoviesForm = (props) => {
     }
   }, []);
 
-  console.log(genres);
   return (
     <div className="container-fluid">
       <div className="row">
@@ -100,12 +99,13 @@ const MoviesForm = (props) => {
                 <input name="_method" type="hidden" value="put" />
               )}
               <input name="utf8" type="hidden" value="&#x2713;" />
+              <input name="genre[types]" type="hidden" value={genres}/> 
+              <input name="movie[release]" type="hidden" value={value}/>
               <input
                 name="authenticity_token"
                 type="hidden"
                 value={props.token}
               />
-              {/* <h5 className="fw-semibold"> Review on {props.movie.title}</h5> */}
               {props.movie ? (
                 <>
                   <h2 className="fw-semibold"> Editing Movie </h2>
@@ -147,7 +147,7 @@ const MoviesForm = (props) => {
                   class="form-control"
                   type="file"
                   id="formFile"
-                  name="user[avatar]"
+                  name="movie[cover]"
                   onChange={handleFile}
                 />
               </div>
@@ -175,8 +175,8 @@ const MoviesForm = (props) => {
                   class="form-control"
                   id="exampleFormControlTextarea1"
                   rows="6"
-                  name="review[body]"
-                  placeholder="Write your review here"
+                  name="movie[summary]"
+                  placeholder="Write the summary of the movie here"
                 >
                   {props.movie ? props.movie.summary : null}
                 </textarea>

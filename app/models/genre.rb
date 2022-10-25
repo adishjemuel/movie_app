@@ -7,7 +7,13 @@ class Genre < ApplicationRecord
 
   attribute :movies_count
 
+  attribute :movies_titles
+
   def movies_count
     movies.count
+  end
+
+  def movies_titles 
+    movies.pluck(:title)
   end
 end

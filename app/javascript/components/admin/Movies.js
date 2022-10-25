@@ -47,12 +47,6 @@ const Movies = (props) => {
           className="col-10 d-flex flex-column justify-content-center"
           style={{ borderLeft: "2px solid gray" }}
         >
-          <div className="d-flex justify-content-end">
-            <button className="btn btn-primary w-20 me-2">
-              {" "}
-              Create New Movie{" "}
-            </button>
-          </div>
           <div className="mt-4 container align-self-center">
             <AdminTable
               data={props.movies}

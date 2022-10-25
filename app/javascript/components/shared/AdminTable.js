@@ -20,6 +20,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import AddIcon from '@mui/icons-material/Add';
+
+
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -209,13 +213,24 @@ const EnhancedTableToolbar = (props) => {
           </Tooltip>
           </a>
         </>
-      ) : (
+      ) : 
+      <>
+      
         <Tooltip title="Select only one to edit, select one or more than one to delete">
           <IconButton>
             <FilterListIcon />
           </IconButton>
         </Tooltip>
-      )}
+        <a href={`/admin/${props.header.toLowerCase()}/new`} style={{background:"none", border: "none", textDecoration: "none"}}>
+        <Tooltip title="Add New Movie">
+          <IconButton>
+            <AddIcon />
+          </IconButton>
+        </Tooltip>
+        </a>
+      </>
+      
+      }
     </Toolbar>
   );
 };

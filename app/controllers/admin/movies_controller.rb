@@ -1,18 +1,21 @@
 class Admin::MoviesController <  Admin::BaseController
 
   load_and_authorize_resource
-  before_action :set_movie, except: %i[index]
+  before_action :set_movie, except: %i[index new create]
 
   def index 
     @movies = Movie.all
   end 
 
   def new 
+    @genres = Genre.all
   end 
 
   def create 
     @movie = Movie.new(movie_params)
-    redirect_to admin_movies_url if @movie.save 
+    @movie.save 
+    set_movie_genres 
+    redirect_to admin_movies_url
   end
   
   def edit 
@@ -20,6 +23,8 @@ class Admin::MoviesController <  Admin::BaseController
   end
 
   def update 
+    @movie.genres.destroy_all
+    set_movie_genres
     redirect_to admin_movies_url if @movie.update(movie_params) 
   end
 
@@ -38,7 +43,16 @@ class Admin::MoviesController <  Admin::BaseController
   private 
 
   def movie_params 
-    params.require(:movie).permit(:title, :summary, :release, :trailer_url, :cover) 
+    params.require(:movie).permit(:title, :summary, :release, :cover) 
+  end
+
+  def set_movie_genres
+    genres_string = params[:genre][:types] 
+    genres_array = genres_string.split(',')
+    genres = Genre.where(type: genres_array)
+    genres.each do |g| 
+      MovieGenre.find_or_create_by(movie: @movie, genre: g)
+    end
   end
 
   def set_movie 

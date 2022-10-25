@@ -38,7 +38,6 @@ class Admin::MoviesController <  Admin::BaseController
   end
 
   def destroy 
-
     params_ids = params[:movies][:ids] 
     params_ids_array = params_ids.split(',') 
     @movies = Movie.where(id: params_ids_array) 

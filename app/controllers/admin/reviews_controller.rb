@@ -1,6 +1,7 @@
 
 class Admin::ReviewsController < Admin::BaseController
-  
+   
+  load_and_authorize_resource
   before_action :set_review, only: %i[edit update destroy show] 
 
   def index 
@@ -38,9 +39,12 @@ class Admin::ReviewsController < Admin::BaseController
     redirect_to edit_admin_review_url
   end
   
-  #Refactor and add success/failure message 
   def destroy 
-    if @review.destroy 
+    params_ids = params[:reviews][:ids] 
+    params_ids_array = params_ids.split(',') 
+    @reviews = Review.where(id: params_ids_array) 
+    if @review.present? 
+      @reviews.destroy_all 
       flash[:successful] = true 
     else 
       flash[:successful] = false 

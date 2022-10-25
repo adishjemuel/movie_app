@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :movies
     resources :genres
     resources :members
-    resources :reviews
+    resources :reviews 
+    resources :users
   end
 end

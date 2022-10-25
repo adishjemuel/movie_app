@@ -173,7 +173,7 @@ const VerticalNav = (props) => {
         </svg>
         <a
           className={`${
-            props.currentPage == "people" ? "fw-bold" : "text-dark"
+            props.currentPage == "users" ? "fw-bold" : "text-dark"
           }`}
           style={{ textDecoration: "none" }}
           href="/admin/users"

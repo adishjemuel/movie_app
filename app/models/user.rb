@@ -15,7 +15,18 @@ class User < ApplicationRecord
   enum role: { user: 0, admin_3: 1, admin_2: 2, admin_1: 3 } 
 
   attribute :avatar_url 
-  attribute :avatar_name
+  attribute :avatar_name 
+  attribute :role_name 
+
+  def role_name 
+    case role 
+    when "user"
+      role.capitalize 
+    else 
+      role.tr('_',' ').capitalize 
+    end 
+  end 
+    
 
   def avatar_url 
     avatar.url 

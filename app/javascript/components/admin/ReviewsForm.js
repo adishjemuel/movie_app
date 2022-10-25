@@ -4,8 +4,6 @@ import ReactStars from "react-rating-stars-component";
 
 const MoviesForm = (props) => {
   const [title, setTitle] = useState("");
-  const [movies, setMovies] = useState([]);
-
   const [rating, setRating] = useState(1);
   const ratingChanged = (newRating) => setRating(newRating);
   useEffect(() => {

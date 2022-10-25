@@ -3,6 +3,7 @@ class Admin::BaseController < ApplicationController
   
   rescue_from CanCan::AccessDenied, :with => :not_allowed
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  
   def current_ability
     controller_name_segments = params[:controller].split('/')
     controller_name_segments.pop

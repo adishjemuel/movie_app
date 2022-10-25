@@ -157,7 +157,7 @@ const EnhancedTableToolbar = (props) => {
           action={`/admin/${props.header.toLowerCase()}/${props.selected[0]}`}
           method="post"
         >
-          <input name="movies[ids]" type="hidden" value={props.selected} />
+          <input name={`${props.header.toLowerCase()}[ids]`} type="hidden" value={props.selected} />
           <input name="authenticity_token" type="hidden" value={props.token} />
 
           <input name="_method" type="hidden" value="delete" />
@@ -182,7 +182,8 @@ const EnhancedTableToolbar = (props) => {
             action={`/admin/${props.header.toLowerCase()}/${props.selected[0]}`}
             method="post"
           >
-            <input name="movies[ids]" type="hidden" value={props.selected} />
+
+          <input name={`${props.header.toLowerCase()}[ids]`} type="hidden" value={props.selected} />
             <input
               name="authenticity_token"
               type="hidden"

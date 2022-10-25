@@ -38,12 +38,16 @@ class Admin::GenresController < Admin::BaseController
   end 
 
   def destroy 
-    if @genre.destroy 
-      flash[:successful] = true
-      redirect_to admin_genres_url 
-    else
-      flash[:successful] = false
+    params_ids = params[:genres][:ids] 
+    params_ids_array = params_ids.split(',') 
+    @genres = Genre.where(id: params_ids_array) 
+    if @genres.present? && 
+      @genres.destroy_all 
+      flash[:successful] = true 
+    else 
+      flash[:successful] = false 
     end
+    redirect_to admin_genres_url
   end
 
   private 

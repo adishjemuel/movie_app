@@ -1,6 +1,7 @@
 <%= react_component('admin/Movies', { user: current_user, 
                                       token: form_authenticity_token.to_s, 
-                                      movies: @movies,
+                                      movies: @movies, 
+                                      success: flash[:successful]
                                       # total_pages: @movies.total_pages,
                                       # current_page: @movies.current_page,
                                     }) %>

@@ -15,5 +15,6 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'home#index'
     resources :movies
     resources :genres
+    resources :members
   end
 end

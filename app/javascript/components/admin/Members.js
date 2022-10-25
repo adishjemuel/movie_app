@@ -5,31 +5,31 @@ import AdminTable from "../shared/AdminTable";
 const Movies = (props) => {
   const columns = [
     {
-      id: "title",
+      id: "first_name",
       numeric: false,
       disablePadding: true,
-      label: "Title",
+      label: "First Name",
       type: "normal",
     },
     {
-      id: "formatted_release_date",
+      id: "last_name",
       numeric: false,
       disablePadding: false,
-      label: "Release",
+      label: "Last Name",
       type: "normal",
     },
     {
-      id: "genres_type",
+      id: "birthday_date",
       disablePadding: false,
       numeric: false,
-      label: "Genre(s)",
-      type: "pill",
+      label: "Birthday",
+      type: "normal",
     },
     {
-      id: "average_rating",
+      id: "overview",
       numeric: true,
       disablePadding: false,
-      label: "Average Rating",
+      label: "Overview",
       type: "normal",
     },
   ];
@@ -39,7 +39,7 @@ const Movies = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="movies" />
+          <VerticalNav user={props.user} currentPage="members" />
         </div>
 
         <div
@@ -47,10 +47,20 @@ const Movies = (props) => {
           style={{ borderLeft: "2px solid gray" }}
         >
           <div className="mt-4 container align-self-center">
+            {props.success && (
+              <div class="alert alert-primary" role="alert">
+                The cast/crew was successfully deleted. 
+              </div>
+            )}
+            {props.success == false && (
+              <div class="alert alert-warning" role="alert">
+                The cast/crew was not successfully deleted. 
+              </div>
+            )}
             <AdminTable
-              data={props.movies}
+              data={props.members}
               columns={columns}
-              header={"Movies"}
+              header={"Members"}
               token={props.token}
             />
           </div>

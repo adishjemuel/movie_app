@@ -1,0 +1,6 @@
+<%= react_component('admin/MembersForm', { user: current_user, 
+                                      token: form_authenticity_token.to_s, 
+                                      member: @member,
+                                      movies: @movies,  
+                                      success: flash[:successful]
+                                    }) %>

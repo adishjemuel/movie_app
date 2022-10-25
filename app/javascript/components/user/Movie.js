@@ -95,6 +95,7 @@ const Movie = (props) => {
                     src={cast.picture_url}
                     className="card-img-top"
                     alt="..."
+                    style={{width: "8rem", height:"5rem"}}
                   />
                   <div class="card-body text-body">
                     <span

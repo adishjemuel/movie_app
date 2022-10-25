@@ -1,5 +1,6 @@
 <%= react_component('admin/MoviesForm', { user: current_user,
                                           token: form_authenticity_token.to_s,
                                           movie: @movie ,
-                                          genres: @genres
+                                          genres: @genres,
+                                          success: flash[:successful]
                                         }) %>

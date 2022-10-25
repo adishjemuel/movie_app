@@ -45,6 +45,8 @@ const VerticalNav = (props) => {
           Home{" "}
         </a>
       </div>
+
+      {props.user.role == "admin_3" &&
       <div
         className="mb-4 ms-5 d-flex align-items-center text-dark"
         style={{ cursor: "pointer" }}
@@ -71,6 +73,7 @@ const VerticalNav = (props) => {
           Dashboard{" "}
         </a>
       </div>
+}
       <div
         className="mb-4 ms-5 d-flex align-items-center"
         style={{ cursor: "pointer" }}
@@ -143,7 +146,7 @@ const VerticalNav = (props) => {
         </svg>
         <a
           className={`${
-            props.currentPage == "people" ? "fw-bold" : "text-dark"
+            props.currentPage == "members" ? "fw-bold" : "text-dark"
           }`}
           style={{ textDecoration: "none" }}
           href="/admin/members"
@@ -152,6 +155,7 @@ const VerticalNav = (props) => {
           Cast & Crews
         </a>
       </div>
+      {props.user.role == "admin_3" &&
       <div
         className="mb-4 ms-5 d-flex align-items-center"
         style={{ cursor: "pointer" }}
@@ -178,6 +182,7 @@ const VerticalNav = (props) => {
           Users
         </a>
       </div>
+}
       <div
         className="mb-auto ms-5 d-flex align-items-center"
         style={{ cursor: "pointer" }}

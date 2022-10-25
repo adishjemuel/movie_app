@@ -18,8 +18,8 @@ const Member = (props) => {
       >
         <div class="container">
           <div class="row pt-4">
-            <div class="col-4" style={{ width: "15rem" }}>
-              <img src={props.member.picture_url} className="img-fluid" />
+            <div class="col-4" style={{ width: "13rem" }}>
+              <img src={props.member.picture_url} className="img-fluid" style={{width:"12rem"}} />
             </div>
             <div class="col-8 text-light d-flex flex-column align-items-start">
               <h1 className="fw-bold">{props.member.first_name} {props.member.last_name} </h1>

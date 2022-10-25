@@ -13,31 +13,42 @@ class Admin::MoviesController <  Admin::BaseController
 
   def create 
     @movie = Movie.new(movie_params)
-    @movie.save 
-    set_movie_genres 
-    redirect_to admin_movies_url
+    if @movie.save 
+      set_movie_genres 
+      flash[:successful] = true 
+      redirect_to new_admin_movie_url
+    else 
+      flash[:successful] = false 
+    end
   end
   
   def edit 
     @genres = Genre.all
   end
 
-  def update 
-    @movie.genres.destroy_all
-    set_movie_genres
-    redirect_to admin_movies_url if @movie.update(movie_params) 
+  def update  
+    if @movie.update(movie_params)
+      @movie.genres.destroy_all
+      set_movie_genres
+      flash[:successful] = true
+      redirect_to edit_admin_movie_url  
+    else 
+      flash[:successful] = false 
+    end
   end
 
   def destroy 
+
     params_ids = params[:movies][:ids] 
     params_ids_array = params_ids.split(',') 
-    redirect_to admin_movies_url if params_ids_array.length == 1 && @movie.destroy
     @movies = Movie.where(id: params_ids_array) 
-    if @movies.present? && movies.count > 1
+    if @movies.present?
       @movies.destroy_all 
-      redirect_to admin_movies_url
+      flash[:successful] = true 
+    else 
+      flash[:successful] = false 
     end
-
+    redirect_to admin_movies_url
   end
   
   private 

@@ -1,6 +1,10 @@
 class Member < ApplicationRecord 
   has_many :casts 
   has_many :movies, through: :casts, dependent: :destroy
+
+  validates :first_name, presence: true 
+  validates :last_name,  presence: true 
+  validates :overview, presence: true
   
   paginates_per 20
   has_attached_file :picture, default_url: "/images/members/vector.jpeg"
@@ -9,6 +13,7 @@ class Member < ApplicationRecord
 
   attribute :picture_url, :string  
   attribute :birthday_date 
+  attribute :movies_title
 
   def birthday_date 
     birthday.respond_to?(:strftime) ? birthday.strftime("%B %d, %Y"): "" 
@@ -16,5 +21,9 @@ class Member < ApplicationRecord
 
   def picture_url 
     picture.url 
+  end
+
+  def movies_title 
+    movies.pluck(:title) 
   end
 end 

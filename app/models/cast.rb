@@ -1,7 +1,7 @@
 class Cast < ApplicationRecord 
   belongs_to :member 
   belongs_to :movie 
-
+  
   enum role: { actor: 0, 
                director: 1, 
                producer: 2, 

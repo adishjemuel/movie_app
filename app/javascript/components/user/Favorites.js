@@ -43,7 +43,7 @@ const Favorites = (props) => {
           ))}
         </section>
         <div className="container row row-cols-1 row-cols-md-5 g-4 pt-4 d-flex justify-content-center overflow-hidden">
-          <img src="/images/fill.jpg" className="img-fluid" style={{width:'25rem'}}/>
+          {props.movies.length == 0 && <img src="/images/fill.jpg" className="img-fluid" style={{width:'25rem'}}/> }
           {props.movies.length > 0 &&
             props.movies.map((movie) => (
               <div

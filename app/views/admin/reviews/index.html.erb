@@ -1,0 +1,5 @@
+<%= react_component('admin/Reviews', { user: current_user, 
+                                      token: form_authenticity_token.to_s, 
+                                      reviews: @reviews, 
+                                      success: flash[:successful]
+                                    }) %>

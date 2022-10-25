@@ -223,7 +223,7 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
         <a href={`/admin/${props.header.toLowerCase()}/new`} style={{background:"none", border: "none", textDecoration: "none"}}>
-        <Tooltip title="Add New Movie">
+        <Tooltip title={`Add New ${props.header.slice(0, -1).toLowerCase()}`}>
           <IconButton>
             <AddIcon />
           </IconButton>

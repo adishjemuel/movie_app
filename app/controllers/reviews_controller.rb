@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
-  authorize_resource 
+  load_and_authorize_resource 
   
   def new  
     @movie = Movie.find(params[:movie_id])

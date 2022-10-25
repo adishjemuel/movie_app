@@ -3,7 +3,7 @@ class FavoritesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_movie, except: %i[index]
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  authorize_resource 
+  load_and_authorize_resource 
   
   def index 
     @movies = current_user.movies.page(params[:page])

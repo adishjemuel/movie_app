@@ -116,7 +116,8 @@ const MoviesForm = (props) => {
                   className="form-control"
                   name="genre[type]"
                   value={type}
-                  onChange={(event) => setType(event.target.value)}
+                  onChange={(event) => setType(event.target.value)} 
+                  required
                 />
               </div>
 

@@ -83,7 +83,7 @@ const MoviesForm = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="members" />
+          <VerticalNav user={props.user} currentPage="members" token={props.token}/>
         </div>
 
         <div

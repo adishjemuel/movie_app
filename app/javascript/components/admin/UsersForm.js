@@ -12,8 +12,7 @@ const UsersForm = (props) => {
       setEmail(props.u.email);
       setImg(props.u.avatar_url);
     }
-    if(props.errors)
-      console.log(props.errors.email[0])
+    if (props.errors) console.log(props.errors.email[0]);
     console.log(props);
   }, []);
 
@@ -30,7 +29,11 @@ const UsersForm = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="users" />
+          <VerticalNav
+            user={props.user}
+            currentPage="users"
+            token={props.token}
+          />
         </div>
 
         <div
@@ -63,7 +66,8 @@ const UsersForm = (props) => {
               )}
               {props.u ? (
                 <>
-                  <h2 className="fw-semibold"> Editing Review </h2>
+                  <h2 className="fw-semibold"> Editing User Details </h2>
+
                   <span class="text-muted">
                     {" "}
                     Before updating the user, make sure the details are right.
@@ -93,7 +97,7 @@ const UsersForm = (props) => {
                   onChange={(event) => setUsername(event.target.value)}
                   required
                 />
-                {props.errors  &&  props.errors.username && (
+                {props.errors && props.errors.username && (
                   <div class="mt-2 text-danger">
                     Username {props.errors.username[0]}
                   </div>
@@ -112,49 +116,54 @@ const UsersForm = (props) => {
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   required
+                  disabled={props.user.role != "admin_3" ? true : false}
                 />
-                {props.errors  &&  props.errors.email && (
+                {props.errors && props.errors.email && (
                   <div class="mt-2 text-danger">
                     Email Address {props.errors.email[0]}
                   </div>
                 )}
               </div>
+              {props.user.role == "admin_3" && (
+                <>
+                  <div class="my-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">
+                      Password
+                    </label>
 
-              <div class="my-3">
-                <label for="exampleFormControlTextarea1" class="form-label">
-                  Password
-                </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="user[password]"
+                      disabled={props.u ? true : false}
+                      required={props.u ? false : true}
+                    />
 
-                <input
-                  type="password"
-                  className="form-control"
-                  name="user[password]"
-                  disabled={props.u ? true : false}
-                  required={props.u ? false : true}
-                />
-
-                {props.errors  &&  props.errors.password && (
-                  <div class="mt-2 text-danger">
-                    Password {props.errors.password[0]}
+                    {props.errors && props.errors.password && (
+                      <div class="mt-2 text-danger">
+                        Password {props.errors.password[0]}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              <div class="my-3">
-                <label className="form-label"> Role </label>
-                <select className="form-select" name="user[role]">
-                  {props.roles.map((m) => (
-                    <option
-                      value={m.value}
-                      key={m.value}
-                      selected={props.u ? props.u.role_name == m.name : false}
-                    >
-                      {m.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
+                  <div class="my-3">
+                    <label className="form-label"> Role </label>
+                    <select className="form-select" name="user[role]">
+                      {props.roles.map((m) => (
+                        <option
+                          value={m.value}
+                          key={m.value}
+                          selected={
+                            props.u ? props.u.role_name == m.name : false
+                          }
+                        >
+                          {m.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </>
+              )}
               <div class={`my-3`}>
                 <label for="formFile" class="form-label fw-semibold">
                   Profile Picture
@@ -170,11 +179,11 @@ const UsersForm = (props) => {
                 />
               </div>
 
-                {props.errors  &&  props.errors.avatar && (
-                  <div class="mt-2 text-danger">
-                    Avatar {props.errors.avatar[0]}
-                  </div>
-                )}
+              {props.errors && props.errors.avatar && (
+                <div class="mt-2 text-danger">
+                  Avatar {props.errors.avatar[0]}
+                </div>
+              )}
               <div className={`${img ? "" : "d-none"}`}>
                 <img src={img} className="img-fluid" />
                 <button

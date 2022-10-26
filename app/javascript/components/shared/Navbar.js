@@ -96,25 +96,13 @@ const Navbar = (props) => {
           </button>
 
           <ul class="dropdown-menu   ms-4">
-            {props.user &&
-              (props.user.role == "admin_1" ||
-                props.user.role == "admin_2"
-                ) && (
-                <li>
-                  <a className="dropdown-item" href="/admin/movies">
-                    Admin Dashboard
-                  </a>
-                </li>
-              )}
-            {props.user &&
-              (props.user.role == "admin_3"
-                ) && (
-                <li>
-                  <a className="dropdown-item" href="/admin/dashboard">
-                    Admin Dashboard
-                  </a>
-                </li>
-              )}
+            {props.user && (
+              <li>
+                <a className="dropdown-item" href="/admin/dashboard">
+                  Admin Dashboard
+                </a>
+              </li>
+            )}
             <li>
               <a class="dropdown-item" href="/users/edit">
                 Profile

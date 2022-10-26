@@ -6,13 +6,14 @@ class Ability
     case controller_namespace 
     when 'Admin'
       return unless user.present? 
-
+      
+      can :manage, user, id: user.id
       if user.admin_1? || user.admin_2?
         can [:read, :create], Movie 
         can [:read, :create], Review
         can [:read, :create], Genre 
         can [:read, :create], Member 
-        can [:read, :update], User, user: user
+        # can :manage, User, user: user
       end
       if user.admin_2?
         can [:update], Movie 
@@ -20,6 +21,7 @@ class Ability
         can [:update], Genre 
         can [:update], Member 
       end
+
       can :manage, :all if user.admin_3?
     
     else 
@@ -30,6 +32,8 @@ class Ability
     
       return unless user.present? 
     
+      can :manage, user, id: user.id 
+      
       can :read, Favorite, user: user
       can :create, Favorite, user: user 
       can :destroy, Favorite, user: user 

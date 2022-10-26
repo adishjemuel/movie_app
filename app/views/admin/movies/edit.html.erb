@@ -2,5 +2,6 @@
                                           token: form_authenticity_token.to_s,
                                           movie: @movie ,
                                           genres: @genres,
-                                          success: flash[:successful]
+                                          success: flash[:successful],
+                                          errors: flash[:errors]
                                         }) %>

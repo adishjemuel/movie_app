@@ -1,7 +1,5 @@
 class MembersController < ApplicationController
   
-  authorize_resource
-   
   def index
     @q = Member.ransack(params[:q])
     @members = @q.result.page params[:page] 

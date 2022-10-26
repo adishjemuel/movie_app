@@ -40,7 +40,7 @@ const Users = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="users" />
+          <VerticalNav user={props.user} currentPage="users" token={props.token} />
         </div>
 
         <div
@@ -63,6 +63,7 @@ const Users = (props) => {
               columns={columns}
               header={"Users"}
               token={props.token}
+              user={props.user}
             />
           </div>
         </div>

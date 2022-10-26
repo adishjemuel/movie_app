@@ -25,7 +25,7 @@ const Genres = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="genres" />
+          <VerticalNav user={props.user} currentPage="genres" token={props.token}/>
         </div>
 
         <div
@@ -46,6 +46,7 @@ const Genres = (props) => {
             )}
 
             <AdminTable
+              user={props.user}
               data={props.genres}
               columns={columns}
               header={"Genres"}

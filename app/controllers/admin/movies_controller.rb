@@ -16,10 +16,11 @@ class Admin::MoviesController <  Admin::BaseController
     if @movie.save 
       set_movie_genres 
       flash[:successful] = true 
-      redirect_to new_admin_movie_url
     else 
+      flash[:errors] = @movie.errors
       flash[:successful] = false 
     end
+    redirect_to new_admin_movie_url
   end
   
   def edit 
@@ -31,10 +32,10 @@ class Admin::MoviesController <  Admin::BaseController
       @movie.genres.destroy_all
       set_movie_genres
       flash[:successful] = true
-      redirect_to edit_admin_movie_url  
     else 
       flash[:successful] = false 
     end
+    redirect_to edit_admin_movie_url  
   end
 
   def destroy 

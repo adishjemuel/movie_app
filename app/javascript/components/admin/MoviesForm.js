@@ -73,12 +73,17 @@ const MoviesForm = (props) => {
     }
   }, []);
 
+  console.log(props);
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="movies" />
+          <VerticalNav
+            user={props.user}
+            currentPage="movies"
+            token={props.token}
+          />
         </div>
 
         <div
@@ -99,13 +104,27 @@ const MoviesForm = (props) => {
                 <input name="_method" type="hidden" value="put" />
               )}
               <input name="utf8" type="hidden" value="&#x2713;" />
-              <input name="genre[types]" type="hidden" value={genres}/> 
-              <input name="movie[release]" type="hidden" value={value}/>
+              <input name="genre[types]" type="hidden" value={genres} />
+              <input name="movie[release]" type="hidden" value={value} />
               <input
                 name="authenticity_token"
                 type="hidden"
                 value={props.token}
               />
+
+              {props.success && (
+                <div class="alert alert-primary" role="alert">
+                  The movie was successfully{" "}
+                  {props.movie ? "updated" : "created"}
+                </div>
+              )}
+              {props.success == false && (
+                <div class="alert alert-warning" role="alert">
+                  The movie was not successfully{" "}
+                  {props.movie ? "updated" : "created"}. There must be some
+                  errors or problems
+                </div>
+              )}
               {props.movie ? (
                 <>
                   <h2 className="fw-semibold"> Editing Movie </h2>
@@ -136,7 +155,14 @@ const MoviesForm = (props) => {
                   name="movie[title]"
                   value={title}
                   onChange={(event) => setTitle(event.target.value)}
+                  required
                 />
+
+                {props.errors && props.errors.title && (
+                  <div class="mt-2 text-danger">
+                    Title {props.errors.title[0]}
+                  </div>
+                )}
               </div>
 
               <div class={`my-3`}>
@@ -150,6 +176,12 @@ const MoviesForm = (props) => {
                   name="movie[cover]"
                   onChange={handleFile}
                 />
+
+                {props.errors && props.errors.cover && (
+                  <div class="mt-2 text-danger">
+                    Cover {props.errors.cover[0]}
+                  </div>
+                )}
               </div>
               <div className={`${props.movie ? "" : "d-none"}`}>
                 <img src={img} className="img-fluid" />
@@ -177,9 +209,15 @@ const MoviesForm = (props) => {
                   rows="6"
                   name="movie[summary]"
                   placeholder="Write the summary of the movie here"
+                  required
                 >
                   {props.movie ? props.movie.summary : null}
                 </textarea>
+                {props.errors && props.errors.summary && (
+                  <div class="mt-2 text-danger">
+                    Summary {props.errors.summary[0]}
+                  </div>
+                )}
               </div>
               <div class="my-3 ">
                 <FormControl sx={{ width: "100%" }}>
@@ -245,6 +283,12 @@ const MoviesForm = (props) => {
                     />
                   </LocalizationProvider>
                 </FormControl>
+
+                {props.errors && props.errors.release && (
+                  <div class="mt-2 text-danger">
+                    Date of Release {props.errors.release[0]}
+                  </div>
+                )}
               </div>
 
               <button

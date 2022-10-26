@@ -3,6 +3,7 @@ import React from "react";
 const VerticalNav = (props) => {
   const navStyle = {
     minHeight: "100vh",
+    position: "fixed",
   };
   return (
     <nav className="nav d-flex flex-column" style={navStyle}>
@@ -46,34 +47,33 @@ const VerticalNav = (props) => {
         </a>
       </div>
 
-      {props.user.role == "admin_3" &&
-      <div
-        className="mb-4 ms-5 d-flex align-items-center text-dark"
-        style={{ cursor: "pointer" }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-clipboard-data-fill me-3"
-          viewBox="0 0 16 16"
+        <div
+          className="mb-4 ms-5 d-flex align-items-center text-dark"
+          style={{ cursor: "pointer" }}
         >
-          <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z" />
-          <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1ZM10 8a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V8Zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1Zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Z" />
-        </svg>
-        <a
-          className={`${
-            props.currentPage == "dashboard" ? "fw-bold" : "text-dark"
-          }`}
-          style={{ textDecoration: "none" }}
-          href="/admin/dashboard"
-        >
-          {" "}
-          Dashboard{" "}
-        </a>
-      </div>
-}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-clipboard-data-fill me-3"
+            viewBox="0 0 16 16"
+          >
+            <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z" />
+            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1ZM10 8a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V8Zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1Zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Z" />
+          </svg>
+          <a
+            className={`${
+              props.currentPage == "dashboard" ? "fw-bold" : "text-dark"
+            }`}
+            style={{ textDecoration: "none" }}
+            href="/admin/dashboard"
+          >
+            {" "}
+            Dashboard{" "}
+          </a>
+        </div>
+        
       <div
         className="mb-4 ms-5 d-flex align-items-center"
         style={{ cursor: "pointer" }}
@@ -155,34 +155,34 @@ const VerticalNav = (props) => {
           Cast & Crews
         </a>
       </div>
-      {props.user.role == "admin_3" &&
-      <div
-        className="mb-4 ms-5 d-flex align-items-center"
-        style={{ cursor: "pointer" }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-person-workspace me-3"
-          viewBox="0 0 16 16"
+      {props.user.role == "admin_3" && (
+        <div
+          className="mb-4 ms-5 d-flex align-items-center"
+          style={{ cursor: "pointer" }}
         >
-          <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-          <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z" />
-        </svg>
-        <a
-          className={`${
-            props.currentPage == "users" ? "fw-bold" : "text-dark"
-          }`}
-          style={{ textDecoration: "none" }}
-          href="/admin/users"
-        >
-          {" "}
-          Users
-        </a>
-      </div>
-}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-person-workspace me-3"
+            viewBox="0 0 16 16"
+          >
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z" />
+          </svg>
+          <a
+            className={`${
+              props.currentPage == "users" ? "fw-bold" : "text-dark"
+            }`}
+            style={{ textDecoration: "none" }}
+            href="/admin/users"
+          >
+            {" "}
+            Users
+          </a>
+        </div>
+      )}
       <div
         className="mb-auto ms-5 d-flex align-items-center"
         style={{ cursor: "pointer" }}
@@ -212,7 +212,7 @@ const VerticalNav = (props) => {
 
       <hr className="border border-1 border-secondary opacity-80 w-100" />
       <div
-        className="mb-5 ms-5 d-flex align-items-center"
+        className="mb-3 ms-5 d-flex align-items-center"
         style={{ cursor: "pointer" }}
       >
         <svg
@@ -232,7 +232,38 @@ const VerticalNav = (props) => {
             d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
           />
         </svg>
-        <a> Log Out </a>
+
+        <form accept-charset="UTF-8" action="/users/sign_out" method="post">
+          <input name="_method" type="hidden" value="delete" />
+          <input name="utf8" type="hidden" value="&#x2713;" />
+          <input name="authenticity_token" type="hidden" value={props.token} />
+
+          <button class="dropdown-item" type="submit">
+            Log Out
+          </button>
+        </form>
+      </div>
+      <div
+        className="mb-5 ms-5 d-flex align-items-center"
+        style={{ cursor: "pointer" }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-gear-fill me-3"
+          viewBox="0 0 16 16"
+        >
+          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+        </svg>
+        <a
+          href={`/admin/users/${props.user.id}/edit`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          {" "}
+          Profile{" "}
+        </a>
       </div>
     </nav>
   );

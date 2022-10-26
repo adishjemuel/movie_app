@@ -1,7 +1,8 @@
 
 class Admin::UsersController < Admin::BaseController
    
-  load_and_authorize_resource
+  load_and_authorize_resource 
+  
   def index 
     @users = User.all
   end
@@ -34,7 +35,11 @@ class Admin::UsersController < Admin::BaseController
       flash[:errors] = @user.errors
       flash[:successful] = false 
     end 
-    redirect_to edit_admin_user_url
+    if current_user.role == User.roles[:admin_3] 
+      redirect_to edit_admin_user_url 
+    else 
+      redirect_to admin_movies_url 
+    end
   end
   
   def destroy 

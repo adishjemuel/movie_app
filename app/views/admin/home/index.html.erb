@@ -1,7 +1,7 @@
 <%= react_component('admin/Dashboard', {user: current_user, 
                                         token: form_authenticity_token.to_s, 
                                         genres: @genres,
-                                        users_count: @users_count, 
+                                        members_count: @members_count, 
                                         reviews_count: @reviews_count,
                                         genres_count: @genres.count
                                        })%>

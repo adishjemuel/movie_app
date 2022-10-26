@@ -8,7 +8,7 @@ const Dashboard = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="dashboard" />
+          <VerticalNav user={props.user} currentPage="dashboard" token={props.token}/>
         </div>
 
         <div className="col-10 d-flex flex-column" style={{borderLeft:'2px solid gray'}}>
@@ -16,8 +16,8 @@ const Dashboard = (props) => {
             <div class="card-group mt-4 ms-2">
               <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">
-                  <h5 class="card-title">Users</h5>
-                  <h1 className="fw-bold"> {props.users_count}</h1>
+                  <h5 class="card-title">Cast & Crews</h5>
+                  <h1 className="fw-bold"> {props.members_count}</h1>
                 </div>
               </div>
               <div class="card">

@@ -1,6 +1,6 @@
 class Genre < ApplicationRecord 
   has_many :movie_genres 
-  validates :type, presence: true
+  validates :type, presence: true, uniqueness: true
   self.inheritance_column = :_type_disabled
 
   has_many :movies, through: :movie_genres, dependent: :destroy

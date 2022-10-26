@@ -4,8 +4,6 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, only: %i[update destroy create]
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   
-  load_and_authorize_resource 
-
   def index 
     sort_by_genre
     @q = @movies_genre.ransack(params[:q])

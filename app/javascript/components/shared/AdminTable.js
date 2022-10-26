@@ -20,10 +20,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-import AddIcon from '@mui/icons-material/Add';
-
-
-
+import AddIcon from "@mui/icons-material/Add";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -152,12 +149,16 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       )}
 
-      {numSelected > 1 ? (
+      {numSelected > 1 && props.user.role == "admin_3" ? (
         <form
           action={`/admin/${props.header.toLowerCase()}/${props.selected[0]}`}
           method="post"
         >
-          <input name={`${props.header.toLowerCase()}[ids]`} type="hidden" value={props.selected} />
+          <input
+            name={`${props.header.toLowerCase()}[ids]`}
+            type="hidden"
+            value={props.selected}
+          />
           <input name="authenticity_token" type="hidden" value={props.token} />
 
           <input name="_method" type="hidden" value="delete" />
@@ -178,60 +179,85 @@ const EnhancedTableToolbar = (props) => {
         </form>
       ) : numSelected == 1 ? (
         <>
-          <form
-            action={`/admin/${props.header.toLowerCase()}/${props.selected[0]}`}
-            method="post"
-          >
+          {props.user.role == "admin_3" && (
+            <form
+              action={`/admin/${props.header.toLowerCase()}/${
+                props.selected[0]
+              }`}
+              method="post"
+            >
+              <input
+                name={`${props.header.toLowerCase()}[ids]`}
+                type="hidden"
+                value={props.selected}
+              />
+              <input
+                name="authenticity_token"
+                type="hidden"
+                value={props.token}
+              />
 
-          <input name={`${props.header.toLowerCase()}[ids]`} type="hidden" value={props.selected} />
-            <input
-              name="authenticity_token"
-              type="hidden"
-              value={props.token}
-            />
-
-            <input name="_method" type="hidden" value="delete" />
-            <button
-              type="submit"
+              <input name="_method" type="hidden" value="delete" />
+              <button
+                type="submit"
+                style={{
+                  background: "none",
+                  border: "none",
+                  textDecoration: "none",
+                }}
+              >
+                <Tooltip title="Delete">
+                  <IconButton>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              </button>
+            </form>
+          )}
+          {(props.user.role == "admin_2" || props.user.role == "admin_3") && (
+            <a
+              href={`/admin/${props.header.toLowerCase()}/${
+                props.selected[0]
+              }/edit`}
               style={{
                 background: "none",
                 border: "none",
                 textDecoration: "none",
               }}
             >
-              <Tooltip title="Delete">
+              <Tooltip title="Edit">
                 <IconButton>
-                  <DeleteIcon />
+                  <EditIcon />
                 </IconButton>
               </Tooltip>
-            </button>
-          </form>
-          <a href={`/admin/${props.header.toLowerCase()}/${props.selected[0]}/edit`} style={{background:"none", border:"none", textDecoration: "none"}}>
-          <Tooltip title="Edit">
+            </a>
+          )}
+        </>
+      ) : (
+        <>
+          <Tooltip title="Select only one to edit, select one or more than one to delete">
             <IconButton>
-              <EditIcon />
+              <FilterListIcon />
             </IconButton>
           </Tooltip>
+          <a
+            href={`/admin/${props.header.toLowerCase()}/new`}
+            style={{
+              background: "none",
+              border: "none",
+              textDecoration: "none",
+            }}
+          >
+            <Tooltip
+              title={`Add New ${props.header.slice(0, -1).toLowerCase()}`}
+            >
+              <IconButton>
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
           </a>
         </>
-      ) : 
-      <>
-      
-        <Tooltip title="Select only one to edit, select one or more than one to delete">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-        <a href={`/admin/${props.header.toLowerCase()}/new`} style={{background:"none", border: "none", textDecoration: "none"}}>
-        <Tooltip title={`Add New ${props.header.slice(0, -1).toLowerCase()}`}>
-          <IconButton>
-            <AddIcon />
-          </IconButton>
-        </Tooltip>
-        </a>
-      </>
-      
-      }
+      )}
     </Toolbar>
   );
 };
@@ -328,12 +354,13 @@ const AdminTable = (props) => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+      <Paper sx={{ width: "100%", mt: 2, mb: 2 }}>
         <EnhancedTableToolbar
           numSelected={selected.length}
           header={props.header}
           token={props.token}
           selected={selected}
+          user={props.user}
         />
 
         <TableContainer>
@@ -344,10 +371,10 @@ const AdminTable = (props) => {
           >
             <EnhancedTableHead
               columns={props.columns}
-              numSelected={selected.length}
+              // numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
+              // onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={props.data.length}
             />

@@ -56,6 +56,22 @@ const Review = (props) => {
           <input name="utf8" type="hidden" value="&#x2713;" />
           <input name="authenticity_token" type="hidden" value={props.token} />
           <input name="review[score]" type="hidden" value={rating} />
+          {props.success && (
+            <div class="alert alert-primary" role="alert">
+              <span> The review was successfully {props.review ? "updated" : "created"}. You can now go back to </span>
+              <a href={`/movies/${props.movie.id}`} className="mt-1">
+                {" "}
+                {props.movie.title}{" "}
+              </a>
+            </div>
+          )}
+          {props.success == false && (
+            <div class="alert alert-warning" role="alert">
+              The review was not successfully{" "}
+              {props.review ? "updated" : "created"}. There must be some errors
+              or problems
+            </div>
+          )}
           <h5 className="fw-semibold"> Review on {props.movie.title}</h5>
 
           <span class="text-muted">
@@ -70,22 +86,6 @@ const Review = (props) => {
             No Spoilers Allowed. It will be deleted immediately{" "}
           </p>
 
-          <div class="my-3">
-            <label className="form-label"> Movie</label>
-            <select className="form-select" name="movie[title]">
-              {props.movies.map((m) => (
-                <option
-                  value={movie.title}
-                  selected={
-                    props.review ? props.review.movie_title == m.title : false
-                  }
-                >
-                  {" "}
-                  {movie.title}{" "}
-                </option>
-              ))}
-            </select>
-          </div>
           <div className="my-3">
             <label className="form-label"> Rating</label>
             <ReactStars
@@ -95,6 +95,9 @@ const Review = (props) => {
               size={24}
               activeColor="#ffd700"
             />
+            {props.errors && props.errors.score && (
+              <div class="mt-2 text-danger">Score {props.errors.score[0]}</div>
+            )}
           </div>
 
           <div class="my-3">
@@ -105,7 +108,13 @@ const Review = (props) => {
               name="review[title]"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
+              required
             />
+            {props.errors && props.errors.title && (
+              <div class="mt-2 text-danger">
+                Headline {props.errors.title[0]}
+              </div>
+            )}
           </div>
           <div class="my-3">
             <label for="exampleFormControlTextarea1" class="form-label">
@@ -117,9 +126,13 @@ const Review = (props) => {
               rows="6"
               name="review[body]"
               placeholder="Write your review here"
+              required
             >
               {props.review ? props.review.body : null}
             </textarea>
+            {props.errors && props.errors.body && (
+              <div class="mt-2 text-danger">Summary {props.errors.body[0]}</div>
+            )}
           </div>
           <button type="submit" class="btn btn-primary mt-2">
             Submit Review

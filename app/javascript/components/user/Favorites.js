@@ -43,7 +43,13 @@ const Favorites = (props) => {
           ))}
         </section>
         <div className="container row row-cols-1 row-cols-md-5 g-4 pt-4 d-flex justify-content-center overflow-hidden">
-          {props.movies.length == 0 && <img src="/images/fill.jpg" className="img-fluid" style={{width:'25rem'}}/> }
+          {props.movies.length == 0 && (
+            <img
+              src="/images/fill.jpg"
+              className="img-fluid"
+              style={{ width: "25rem" }}
+            />
+          )}
           {props.movies.length > 0 &&
             props.movies.map((movie) => (
               <div
@@ -61,7 +67,7 @@ const Favorites = (props) => {
                     }}
                   >
                     <img
-                      src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/avengersendgame_lob_crd_05.jpg"
+                      src={movie.cover_url}
                       className="card-img-top"
                       style={{ height: "18rem" }}
                       alt="..."
@@ -96,11 +102,17 @@ const Favorites = (props) => {
                               value="delete"
                             />
                             <input
+                              type="hidden"
+                              name="movie[id]"
+                              value={movie.id}
+                            />
+                            <input name="list" value="true" type="hidden" />
+                            <input
                               name="authenticity_token"
                               type="hidden"
                               value={props.token}
                             />
-                            <button class="dropdown-item" type="submit">
+                            <button className="dropdown-item" type="submit">
                               Remove
                             </button>
                           </form>

@@ -46,14 +46,7 @@ const Movie = (props) => {
                   {props.on_list && (
                     <input name="_method" type="hidden" value="delete" />
                   )}
-                  {props.on_list == false && (
-                    <input type="hidden" name="id" value={props.movie.id} />
-                  )}
-                  <input
-                    name="authenticity_token"
-                    type="hidden"
-                    value={props.token}
-                  />
+                  <input type="hidden" name="movie[id]" value={props.movie.id} />
                   <input
                     name="authenticity_token"
                     type="hidden"
@@ -75,6 +68,36 @@ const Movie = (props) => {
       </section>
 
       <section className="container mx-4 px-4">
+        {props.success_create && (
+          <div class="alert alert-primary" role="alert">
+            The movie was successfully added to your watchlist
+          </div>
+        )}
+        {props.success_create == false && (
+          <div class="alert alert-warning" role="alert">
+            The movie was not  successfully added to your watchlist
+          </div>
+        )}
+        {props.success_remove && (
+          <div class="alert alert-primary" role="alert">
+            The movie was successfully removed from your watchlist
+          </div>
+        )}
+        {props.success_remove == false && (
+          <div class="alert alert-warning" role="alert">
+            The movie was not  successfully removed from your watchlist
+          </div>
+        )}
+        {props.success && (
+          <div class="alert alert-primary" role="alert">
+            The review was successfully deleted
+          </div>
+        )}
+        {props.success == false && (
+          <div class="alert alert-warning" role="alert">
+            The review was not successfully deleted
+          </div>
+        )}
         <h1 className="fw-normal"> Cast and Crews </h1>
         <div className="d-flex flex-nowrap overflow-scroll pt-4">
           {props.casts_and_crews.map((cast) => (
@@ -95,7 +118,7 @@ const Movie = (props) => {
                     src={cast.picture_url}
                     className="card-img-top"
                     alt="..."
-                    style={{width: "8rem", height:"5rem"}}
+                    style={{ width: "8rem", height: "5rem" }}
                   />
                   <div class="card-body text-body">
                     <span
@@ -141,7 +164,8 @@ const Movie = (props) => {
                     <h5 class="card-title">{review.title}</h5>
 
                     {props.user &&
-                      (props.user.username == review.review_user.username || props.user.role == "admin") && (
+                      (props.user.username == review.review_user.username ||
+                        props.user.role == "admin") && (
                         <div class="dropdown ms-5">
                           <button
                             class="btn btn-secondary dropdown-toggle"

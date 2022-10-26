@@ -18,28 +18,38 @@ class ReviewsController < ApplicationController
     @review = @movie.reviews.create(review_params) 
     @review.user_id = current_user.id 
 
-    if @review.save 
-      redirect_to @movie  
+    if @review.save
+      flash[:successful] = true 
     else 
-      redirect_to root_path 
+      flash[:errors] = @review.errors
+      flash[:successful] = false 
     end
+    redirect_to new_movie_review_url
   end
 
   def edit 
   end 
 
   def update 
-    if @review.update(review_params) 
-      redirect_to @review.movie
+    if @review.update(review_params)  
+      flash[:successful] = true 
     else 
-      redirect_to root_path 
+      flash[:errors] = @review.errors
+      flash[:successful] = false  
     end 
+    redirect_to edit_review_url
   end
   
   #Refactor and add success/failure message 
   def destroy 
     @movie = @review.movie
-    redirect_to @movie if @review.destroy
+    if @review.destroy 
+      flash[:successful] = true 
+    else 
+      flash[:successful] = false 
+      flash[:errors] = @review.errors 
+    end 
+    redirect_to @movie 
   end 
 
   private 
@@ -49,7 +59,7 @@ class ReviewsController < ApplicationController
   end 
 
   def set_review 
-    @review = Review.find params[:id] 
+    @review = Review.includes(:movie).find params[:id] 
   end
 
   def record_not_found 

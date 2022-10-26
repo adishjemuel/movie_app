@@ -34,13 +34,9 @@ class Ability
     
       can :manage, user, id: user.id 
       
-      can :read, Favorite, user: user
-      can :create, Favorite, user: user 
-      can :destroy, Favorite, user: user 
+      can :manage, Favorite, user: user
 
-      can :create, Review, user: user 
-      can :update, Review, user: user
-      can :destroy, Review, user: user
+      can :manage, Review, user: user 
     
       return unless user.admin_1? || user.admin_2? || user.admin_3?
 

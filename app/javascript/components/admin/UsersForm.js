@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import VerticalNav from "../shared/VerticalNav";
 
@@ -6,12 +5,15 @@ const UsersForm = (props) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [img, setImg] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(10);
   useEffect(() => {
     if (props.u) {
       setUsername(props.u.username);
       setEmail(props.u.email);
       setImg(props.u.avatar_url);
     }
+    if(props.errors)
+      console.log(props.errors.email[0])
     console.log(props);
   }, []);
 
@@ -20,7 +22,8 @@ const UsersForm = (props) => {
   };
 
   const handleReset = () => {
-    setImg(props.u.avatar_url);
+    setSelectedFile(Date.now());
+    if (props.u) setImg(props.u.avatar_url);
   };
   return (
     <div className="container-fluid">
@@ -36,16 +39,10 @@ const UsersForm = (props) => {
         >
           <div className="mt-4 container">
             <form
-              action={
-                props.u
-                  ? `/admin/users/${props.u.id}`
-                  : `/admin/users`
-              }
+              action={props.u ? `/admin/users/${props.u.id}` : `/admin/users`}
               method="post"
             >
-              {props.u && (
-                <input name="_method" type="hidden" value="put" />
-              )}
+              {props.u && <input name="_method" type="hidden" value="put" />}
               <input name="utf8" type="hidden" value="&#x2713;" />
               <input
                 name="authenticity_token"
@@ -55,12 +52,13 @@ const UsersForm = (props) => {
 
               {props.success && (
                 <div class="alert alert-primary" role="alert">
-                  The user was successfully {props.u ? 'updated': 'created'}
+                  The user was successfully {props.u ? "updated" : "created"}
                 </div>
               )}
               {props.success == false && (
                 <div class="alert alert-warning" role="alert">
-                  The user was not successfully {props.u ? 'updated': 'created'}
+                  The user was not successfully{" "}
+                  {props.u ? "updated" : "created"}
                 </div>
               )}
               {props.u ? (
@@ -68,9 +66,9 @@ const UsersForm = (props) => {
                   <h2 className="fw-semibold"> Editing Review </h2>
                   <span class="text-muted">
                     {" "}
-                    Before updating the user, make sure the details are right. It is
-                    important to have an accurate depiction and there is no
-                    misrepresentation{" "}
+                    Before updating the user, make sure the details are right.
+                    It is important to have an accurate depiction and there is
+                    no misrepresentation{" "}
                   </span>
                 </>
               ) : (
@@ -95,6 +93,11 @@ const UsersForm = (props) => {
                   onChange={(event) => setUsername(event.target.value)}
                   required
                 />
+                {props.errors  &&  props.errors.username && (
+                  <div class="mt-2 text-danger">
+                    Username {props.errors.username[0]}
+                  </div>
+                )}
               </div>
 
               <div class="my-3">
@@ -103,13 +106,18 @@ const UsersForm = (props) => {
                 </label>
 
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
                   name="user[email]"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   required
                 />
+                {props.errors  &&  props.errors.email && (
+                  <div class="mt-2 text-danger">
+                    Email Address {props.errors.email[0]}
+                  </div>
+                )}
               </div>
 
               <div class="my-3">
@@ -121,8 +129,15 @@ const UsersForm = (props) => {
                   type="password"
                   className="form-control"
                   name="user[password]"
+                  disabled={props.u ? true : false}
                   required={props.u ? false : true}
                 />
+
+                {props.errors  &&  props.errors.password && (
+                  <div class="mt-2 text-danger">
+                    Password {props.errors.password[0]}
+                  </div>
+                )}
               </div>
 
               <div class="my-3">
@@ -131,11 +146,8 @@ const UsersForm = (props) => {
                   {props.roles.map((m) => (
                     <option
                       value={m.value}
-                      selected={
-                        props.u
-                          ? props.u.role_name == m.name
-                          : false
-                      }
+                      key={m.value}
+                      selected={props.u ? props.u.role_name == m.name : false}
                     >
                       {m.name}
                     </option>
@@ -153,18 +165,28 @@ const UsersForm = (props) => {
                   id="formFile"
                   name="user[avatar]"
                   onChange={handleFile}
+                  key={selectedFile}
+                  accept="image/*"
                 />
               </div>
-              <div className={`${props.u ? "" : "d-none"}`}>
+
+                {props.errors  &&  props.errors.avatar && (
+                  <div class="mt-2 text-danger">
+                    Avatar {props.errors.avatar[0]}
+                  </div>
+                )}
+              <div className={`${img ? "" : "d-none"}`}>
                 <img src={img} className="img-fluid" />
                 <button
                   className={`btn btn-danger w-full form-control mt-3 ${
-                    props.u ? "" : "d-none"
+                    img ? "" : "d-none"
                   }`}
                   type="button"
                   onClick={handleReset}
                 >
-                  Reset
+                  {props.u
+                    ? `Reset To Existing Avatar(${props.u.avatar_name})`
+                    : "Cancel Picture"}
                 </button>
               </div>
 

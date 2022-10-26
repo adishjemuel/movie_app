@@ -12,6 +12,7 @@ class Ability
         can [:read, :create], Review
         can [:read, :create], Genre 
         can [:read, :create], Member 
+        can [:read, :update], User, user: user
       end
       if user.admin_2?
         can [:update], Movie 

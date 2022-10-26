@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_attached_file :avatar, default_url: "/images/default.jpeg"
   validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  validates :username, presence: true, uniqueness: true 
+  validates :email, presence: true, uniqueness: true 
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

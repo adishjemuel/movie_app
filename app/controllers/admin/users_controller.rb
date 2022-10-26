@@ -1,7 +1,7 @@
 
 class Admin::UsersController < Admin::BaseController
    
-
+  load_and_authorize_resource
   def index 
     @users = User.all
   end
@@ -15,6 +15,7 @@ class Admin::UsersController < Admin::BaseController
     if @user.save 
       flash[:successful] = true 
     else 
+      flash[:errors] = @user.errors
       flash[:successful] = false 
     end
     redirect_to new_admin_user_url
@@ -27,9 +28,10 @@ class Admin::UsersController < Admin::BaseController
 
   def update 
     @user = User.find(params[:id]) 
-    if @user.update(user_params) 
+    if @user.update_without_password(user_params) 
       flash[:successful] = true 
     else 
+      flash[:errors] = @user.errors
       flash[:successful] = false 
     end 
     redirect_to edit_admin_user_url
@@ -55,10 +57,10 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def roles 
-    [ {name: "User", value: User.roles[:user]},
-      {name: "Admin 3", value: User.roles[:admin_3]}, 
-      {name: "Admin 2", value: User.roles[:admin_2]},
-      {name: "Admin 1", value: User.roles[:admin_1]} 
+    [ {name: "User", value: "user"},
+      {name: "Admin 3", value: "admin_3"}, 
+      {name: "Admin 2", value: "admin_2"},
+      {name: "Admin 1", value: "admin_1"} 
     ]
   end
 

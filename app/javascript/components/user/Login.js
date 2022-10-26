@@ -55,6 +55,7 @@ const Login = (props) => {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               name="user[email]"
+              required 
             />
             <div id="emailHelp" class="form-text my-2">
               We'll never share your email with anyone else.
@@ -69,6 +70,7 @@ const Login = (props) => {
               class="form-control"
               name="user[password]"
               id="exampleInputPassword1"
+              required
             />
           </div>
           <button type="submit" class="btn btn-primary mt-2">

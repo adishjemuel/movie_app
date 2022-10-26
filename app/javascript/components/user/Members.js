@@ -26,7 +26,7 @@ const Members = (props) => {
     <div>
       <Navbar user={props.user} token={props.token} type="members"/>
       <div className="container  py-2 px-2">
-        <section className="text-center">
+        <section className="text-start ms-2 my-4">
           <h1>Popular People</h1>
         </section>
         <section className="ms-3 d-flex flex-row flex-wrap">

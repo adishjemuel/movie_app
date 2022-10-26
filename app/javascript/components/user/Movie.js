@@ -11,7 +11,7 @@ const Movie = (props) => {
         class="my-5 w-full"
         style={{
           backgroundImage: `linear-gradient(rgba(0 ,0 ,0, 0.5), rgba(0, 0, 0, 0.5)),url(${props.movie.cover_url}`,
-          height: "23rem",
+          minHeight: "23rem",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -22,45 +22,69 @@ const Movie = (props) => {
             <div class="col-4" style={{ width: "15rem" }}>
               <img src={props.movie.cover_url} className="img-fluid" />
             </div>
-            <div class="col-8 text-light d-flex flex-column align-items-start">
-              <h1 className="fw-bold">{props.movie.title} </h1>
-              <span className="fs-5 ps-1 fw-light">
-                {" "}
-                {props.movie.formatted_release_date}{" "}
-              </span>
-
-              <span className="fs-4 ps-1 pt-4 semi-bold"> Overview </span>
-              <p className="ps-1 fs-6 pt-2 fst-italic ">
-                {" "}
-                {props.movie.summary}{" "}
-              </p>
-              {props.user && (
-                <form
-                  action={
-                    props.on_list
-                      ? `/favorites/${props.movie.id}`
-                      : "/favorites"
-                  }
-                  method="post"
-                >
-                  {props.on_list && (
-                    <input name="_method" type="hidden" value="delete" />
-                  )}
-                  <input type="hidden" name="movie[id]" value={props.movie.id} />
-                  <input
-                    name="authenticity_token"
-                    type="hidden"
-                    value={props.token}
-                  />
-                  <button
-                    type="submit"
-                    className="btn btn-outline-primary text-white text-center"
+            <div class="col-8 text-light align-items-start">
+              <div className="d-flex justify-content-between align-items-center">
+                <h1 className="fw-bold me-auto">{props.movie.title} </h1>
+                {props.user && (
+                  <form
+                    action={
+                      props.on_list
+                        ? `/favorites/${props.movie.id}`
+                        : "/favorites"
+                    }
+                    method="post"
                   >
-                    {props.on_list
-                      ? "Remove From Your Watchlist"
-                      : "Add To Your Watchlist"}
-                  </button>
-                </form>
+                    {props.on_list && (
+                      <input name="_method" type="hidden" value="delete" />
+                    )}
+                    <input
+                      type="hidden"
+                      name="movie[id]"
+                      value={props.movie.id}
+                    />
+                    <input
+                      name="authenticity_token"
+                      type="hidden"
+                      value={props.token}
+                    />
+                    <button
+                      type="submit"
+                      className="btn btn-outline-primary text-white text-center"
+                    >
+                      {props.on_list
+                        ? "Remove From Your Watchlist"
+                        : "Add To Your Watchlist"}
+                    </button>
+                  </form>
+                )}
+              </div>
+              <div className="d-flex align-items-center">
+                <span className="fs-4 fw-normal me-2"> Date of Release : </span>
+                <span className="fs-4 fw-light">
+                  {" "}
+                  {props.movie.formatted_release_date}{" "}
+                </span>
+              </div>
+              <span className="fs-3 semi-bold"> Overview </span>
+              <p className="fs-5 fst-italic "> {props.movie.summary} </p>
+
+              <h5> Average Rating </h5>
+              <ReactStars
+                count={5}
+                value={props.movie.average_rating}
+                size={24}
+                activeColor="#ffd700"
+                edit={false}
+              />
+              <span className="fs-5"> Genre(s) </span>
+              {props.movie.genres_type && props.movie.genres_type.length > 0 && (
+                <div className="d-flex mb-4">
+                  {props.movie.genres_type.map((genre) => (
+                    <span className="fs-6 fw-lighter me-4" key={genre}>
+                      {genre}{" "}
+                    </span>
+                  ))}
+                </div>
               )}
             </div>
           </div>
@@ -75,7 +99,7 @@ const Movie = (props) => {
         )}
         {props.success_create == false && (
           <div class="alert alert-warning" role="alert">
-            The movie was not  successfully added to your watchlist
+            The movie was not successfully added to your watchlist
           </div>
         )}
         {props.success_remove && (
@@ -85,7 +109,7 @@ const Movie = (props) => {
         )}
         {props.success_remove == false && (
           <div class="alert alert-warning" role="alert">
-            The movie was not  successfully removed from your watchlist
+            The movie was not successfully removed from your watchlist
           </div>
         )}
         {props.success && (

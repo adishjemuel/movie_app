@@ -18,7 +18,11 @@ const MoviesForm = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="reviews" token={props.token} />
+          <VerticalNav
+            user={props.user}
+            currentPage="reviews"
+            token={props.token}
+          />
         </div>
 
         <div
@@ -37,22 +41,23 @@ const MoviesForm = (props) => {
               {props.review && (
                 <input name="_method" type="hidden" value="put" />
               )}
-              <input name="review[score]" type="hidden" value={rating}/>`
+              <input name="review[score]" type="hidden" value={rating} />`
               <input name="utf8" type="hidden" value="&#x2713;" />
               <input
                 name="authenticity_token"
                 type="hidden"
                 value={props.token}
               />
-
               {props.success && (
                 <div class="alert alert-primary" role="alert">
-                  The review was successfully {props.review ? 'updated': 'created'}
+                  The review was successfully{" "}
+                  {props.review ? "updated" : "created"}
                 </div>
               )}
               {props.success == false && (
                 <div class="alert alert-warning" role="alert">
-                  The review was not successfully {props.review ? 'updated': 'created'}
+                  The review was not successfully{" "}
+                  {props.review ? "updated" : "created"}
                 </div>
               )}
               {props.review ? (
@@ -76,7 +81,6 @@ const MoviesForm = (props) => {
                   </span>
                 </>
               )}
-
               <div class="my-3">
                 <label className="form-label"> Movie</label>
                 <select className="form-select" name="movie[id]">
@@ -90,10 +94,14 @@ const MoviesForm = (props) => {
                       }
                     >
                       {m.title}
-
                     </option>
                   ))}
                 </select>
+                {props.errors && props.errors.movie && (
+                  <div class="mt-2 text-danger">
+                    Movie {props.errors.movie[0]}
+                  </div>
+                )}
               </div>
               <div className="my-3">
                 <label className="form-label"> Rating</label>
@@ -104,8 +112,12 @@ const MoviesForm = (props) => {
                   size={24}
                   activeColor="#ffd700"
                 />
+                {props.errors && props.errors.score && (
+                  <div class="mt-2 text-danger">
+                    Score {props.errors.score[0]}
+                  </div>
+                )}
               </div>
-
               <div class="my-3">
                 <label className="form-label fw-semibold"> Headline </label>
                 <input
@@ -116,8 +128,12 @@ const MoviesForm = (props) => {
                   onChange={(event) => setTitle(event.target.value)}
                   required
                 />
+                {props.errors && props.errors.title && (
+                  <div class="mt-2 text-danger">
+                    Headline {props.errors.title[0]}
+                  </div>
+                )}
               </div>
-
               <div class="my-3">
                 <label for="exampleFormControlTextarea1" class="form-label">
                   Summary
@@ -132,8 +148,12 @@ const MoviesForm = (props) => {
                 >
                   {props.review ? props.review.body : null}
                 </textarea>
+                {props.errors && props.errors.body && (
+                  <div class="mt-2 text-danger">
+                    Summary {props.errors.body[0]}
+                  </div>
+                )}
               </div>
-
               <button
                 type="submit"
                 class="btn btn-primary my-2 w-full form-control"

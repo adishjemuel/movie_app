@@ -26,6 +26,13 @@ const Movies = (props) => {
       type: "normal",
     },
     {
+      id: "gender_name", 
+      disablePadding: false,
+      numeric: false,
+      label: "Gender",
+      type: "normal",
+    },
+    {
       id: "overview",
       numeric: true,
       disablePadding: false,

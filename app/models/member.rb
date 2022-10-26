@@ -16,7 +16,12 @@ class Member < ApplicationRecord
 
   attribute :picture_url, :string  
   attribute :birthday_date 
-  attribute :movies_title
+  attribute :movies_title 
+  attribute :gender_name
+
+  def gender_name 
+    gender? ? gender.capitalize : nil
+  end
 
   def birthday_date 
     birthday.respond_to?(:strftime) ? birthday.strftime("%B %d, %Y"): "" 

@@ -185,6 +185,22 @@ const MoviesForm = (props) => {
                 )}
               </div>
 
+                  <div class="my-3">
+                    <label className="form-label"> Gender </label>
+                    <select className="form-select" name="member[gender]">
+                      {props.genders.map((m) => (
+                        <option
+                          value={m.value}
+                          key={m.value}
+                          selected={
+                            props.u ? props.member.gender_name && props.member.gender_name == m.name : false
+                          }
+                        >
+                          {m.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
               <div class={`my-3`}>
                 <label for="formFile" class="form-label fw-semibold">
                   Picture

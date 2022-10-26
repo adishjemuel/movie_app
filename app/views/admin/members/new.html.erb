@@ -2,5 +2,7 @@
 <%= react_component('admin/MembersForm', { user: current_user, 
                                       token: form_authenticity_token.to_s, 
                                       movies: @movies,  
-                                      success: flash[:successful]
+                                      success: flash[:successful],
+                                      errors: flash[:errors],
+                                      genders: @genders
                                     }) %>

@@ -5,6 +5,9 @@ class Member < ApplicationRecord
   validates :first_name, presence: true 
   validates :last_name,  presence: true 
   validates :overview, presence: true
+  validates :birthday, presence: true 
+  validates :gender, presence: true
+  validates :picture, presence: true
   
   paginates_per 20
   has_attached_file :picture, default_url: "/images/members/vector.jpeg"

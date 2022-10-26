@@ -68,9 +68,8 @@ const MoviesForm = (props) => {
   useEffect(() => {
     if (props.member) {
       setFirstName(props.member.first_name);
-      setLastName(props.member.last_name); 
-      if(props.member.birthday)
-        setValue(new Date(props.member.birthday));
+      setLastName(props.member.last_name);
+      if (props.member.birthday) setValue(new Date(props.member.birthday));
       setImg(props.member.picture_url);
       setMovies(props.member.movies_title);
     }
@@ -83,7 +82,11 @@ const MoviesForm = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="members" token={props.token}/>
+          <VerticalNav
+            user={props.user}
+            currentPage="members"
+            token={props.token}
+          />
         </div>
 
         <div
@@ -114,14 +117,14 @@ const MoviesForm = (props) => {
 
               {props.success && (
                 <div class="alert alert-primary" role="alert">
-                  The cast/crew was successfully updated. You can still update
-                  it if there are changes in mind
+                  The cast/crew was successfully{" "}
+                  {props.member ? "updated" : "created"}
                 </div>
               )}
               {props.success == false && (
                 <div class="alert alert-warning" role="alert">
-                  The cast/crew was not successfully updated. There must be some
-                  errors or problems
+                  The cast/crew was not successfully{" "}
+                  {props.member ? "updated" : "created"}
                 </div>
               )}
               {props.member ? (
@@ -153,9 +156,15 @@ const MoviesForm = (props) => {
                   className="form-control"
                   name="member[first_name]"
                   value={firstName}
-                  onChange={(event) => setFirstName(event.target.value)} 
+                  onChange={(event) => setFirstName(event.target.value)}
                   required
                 />
+
+                {props.errors && props.errors.first_name && (
+                  <div class="mt-2 text-danger">
+                    First Name {props.errors.first_name[0]}
+                  </div>
+                )}
               </div>
 
               <div class="my-3">
@@ -168,6 +177,12 @@ const MoviesForm = (props) => {
                   onChange={(event) => setLastName(event.target.value)}
                   required
                 />
+
+                {props.errors && props.errors.last_name && (
+                  <div class="mt-2 text-danger">
+                    Last Name {props.errors.last_name[0]}
+                  </div>
+                )}
               </div>
 
               <div class={`my-3`}>
@@ -181,6 +196,12 @@ const MoviesForm = (props) => {
                   name="member[picture]"
                   onChange={handleFile}
                 />
+
+                {props.errors && props.errors.picture && (
+                  <div class="mt-2 text-danger">
+                    Picture {props.errors.picture[0]}
+                  </div>
+                )}
               </div>
               <div className={`${props.member ? "" : "d-none"}`}>
                 <img src={img} className="img-fluid" />
@@ -212,6 +233,11 @@ const MoviesForm = (props) => {
                 >
                   {props.member ? props.member.overview : null}
                 </textarea>
+                {props.errors && props.errors.overview && (
+                  <div class="mt-2 text-danger">
+                    Overview {props.errors.overview[0]}
+                  </div>
+                )}
               </div>
               <div class="my-3 ">
                 <FormControl sx={{ width: "100%" }}>
@@ -273,6 +299,11 @@ const MoviesForm = (props) => {
                     />
                   </LocalizationProvider>
                 </FormControl>
+                {props.errors && props.errors.birthday && (
+                  <div class="mt-2 text-danger">
+                    Birthday {props.errors.birthday[0]}
+                  </div>
+                )}
               </div>
 
               <button

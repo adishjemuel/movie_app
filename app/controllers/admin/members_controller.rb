@@ -10,6 +10,7 @@ class Admin::MembersController <  Admin::BaseController
 
   def new 
     @movies = Movie.all
+    @genders = genders
   end 
 
   def create 
@@ -18,7 +19,7 @@ class Admin::MembersController <  Admin::BaseController
       set_member_movies
       flash[:successful] = true 
     else 
-      p @member.errors.messages
+      flash[:errors] = @member.errors
       flash[:successful] = false 
     end
     redirect_to new_admin_member_url
@@ -26,6 +27,7 @@ class Admin::MembersController <  Admin::BaseController
   
   def edit 
     @movies = Movie.all
+    @genders = genders
   end
 
   def update  
@@ -34,6 +36,7 @@ class Admin::MembersController <  Admin::BaseController
       set_member_movies
       flash[:successful] = true
     else 
+      flash[:errors] = @member.errors
       flash[:successful] = false 
     end
     redirect_to edit_admin_member_url  
@@ -69,6 +72,12 @@ class Admin::MembersController <  Admin::BaseController
 
   def set_member
     @member = Member.includes(:movies).find params[:id]
+  end
+
+  def genders 
+    [ {name: "Male", value: "male"},
+      {name: "Female", value: "female"} 
+    ]
   end
  
 end

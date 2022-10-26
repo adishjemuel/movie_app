@@ -16,10 +16,11 @@ class Admin::GenresController < Admin::BaseController
     if @genre.save 
       set_genre_movies 
       flash[:successful] = true
-      redirect_to new_admin_genre_url
     else 
+      flash[:errors] = @genre.errors
       flash[:successful] = false
     end
+    redirect_to new_admin_genre_url
   end
 
   def edit 
@@ -31,17 +32,18 @@ class Admin::GenresController < Admin::BaseController
       @genre.movies.destroy_all
       set_genre_movies
       flash[:successful] = true
-      redirect_to edit_admin_genre_url  
     else 
+      flash[:errors] = @genre.errors
       flash[:successful] = false 
     end
+    redirect_to edit_admin_genre_url  
   end 
 
   def destroy 
     params_ids = params[:genres][:ids] 
     params_ids_array = params_ids.split(',') 
     @genres = Genre.where(id: params_ids_array) 
-    if @genres.present? && 
+    if @genres.present?
       @genres.destroy_all 
       flash[:successful] = true 
     else 

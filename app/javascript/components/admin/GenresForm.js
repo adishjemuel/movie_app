@@ -51,7 +51,11 @@ const MoviesForm = (props) => {
       <div className="row">
         <div className="col-2 my-1">
           {" "}
-          <VerticalNav user={props.user} currentPage="genres" token={props.token} />
+          <VerticalNav
+            user={props.user}
+            currentPage="genres"
+            token={props.token}
+          />
         </div>
 
         <div
@@ -77,18 +81,22 @@ const MoviesForm = (props) => {
                 type="hidden"
                 value={props.token}
               />
+
+              {props.success && (
+                <div class="alert alert-primary" role="alert">
+                  The genre was successfully{" "}
+                  {props.genre ? "updated" : "created"}
+                </div>
+              )}
+              {props.success == false && (
+                <div class="alert alert-warning" role="alert">
+                  The genre was not successfully{" "}
+                  {props.genre ? "updated" : "created"} There must be some
+                  errors or problems
+                </div>
+              )}
               {props.genre ? (
                 <>
-                  {props.success && (
-                    <div class="alert alert-primary" role="alert">
-                      The genre was successfully updated. You can still update it if there are changes in mind
-                    </div>
-                  )}
-                  {props.success == false && (
-                    <div class="alert alert-warning" role="alert">
-                      The genre was not successfully updated. There must be some errors or problems
-                    </div>
-                  )}
                   <h2 className="fw-semibold"> Editing Genre </h2>
                   <span class="text-muted">
                     {" "}
@@ -116,9 +124,15 @@ const MoviesForm = (props) => {
                   className="form-control"
                   name="genre[type]"
                   value={type}
-                  onChange={(event) => setType(event.target.value)} 
+                  onChange={(event) => setType(event.target.value)}
                   required
                 />
+
+                {props.errors && props.errors.type && (
+                  <div class="mt-2 text-danger">
+                    Type {props.errors.type[0]}
+                  </div>
+                )}
               </div>
 
               <div class="my-3 ">

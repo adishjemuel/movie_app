@@ -12,7 +12,7 @@ const Homepage = (props) => {
       <form action="/movies" method="get" key={index}>
         <li
           className={`page-item ${
-            index + 1 == props.currentPage ? "active" : ""
+            index + 1 == props.current_page ? "active" : ""
           }`}
         >
           <input name="page" value={index + 1} type="hidden" />
@@ -93,7 +93,14 @@ const Homepage = (props) => {
           ))}
         </div>
       </div>
-      {props.pages > 1 ? <Pagination content={content} /> : null}
+      {props.pages > 1 ? (
+        <Pagination
+          content={content}
+          currentPage={props.current_page}
+          pages={props.pages}
+          url={"movies"}
+        />
+      ) : null}
       <Footer />
     </div>
   );

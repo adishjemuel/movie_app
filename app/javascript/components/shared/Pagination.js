@@ -1,18 +1,36 @@
 import React from "react";
 
 const Pagination = (props) => {
+  console.log(props);
   return (
-    <nav className="container ms-5 mt-3">
-      <ul class="pagination justify-content-start">
-        <li class="page-item disabled">
-          <a class="page-link ms-3">Previous</a>
-        </li>
+    <nav className="container ms-5 my-3">
+      <ul class="pagination pagination-lg justify-content-start ms-4">
+        <form action={`/${props.url}`} method="get">
+          <input name="page" value={props.currentPage - 1} type="hidden" />
+          <li class="page-item">
+            <button
+              class="page-link"
+              aria-label="Next"
+              disabled={props.currentPage == 1 ? "true" : ""}
+            >
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+          </li>
+        </form>
+
         {props.content}
-        <li class="page-item">
-          <a class="page-link" href="#">
-            Next
-          </a>
-        </li>
+        <form action={`/${props.url}`} method="get">
+          <input name="page" value={props.currentPage + 1} type="hidden" />
+          <li class="page-item">
+            <button
+              class="page-link"
+              aria-label="Previous"
+              disabled={props.currentPage == props.pages ? "true" : ""}
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          </li>
+        </form>
       </ul>
     </nav>
   );

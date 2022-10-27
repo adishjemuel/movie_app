@@ -9,6 +9,8 @@ class MoviesController < ApplicationController
     @q = @movies_genre.ransack(params[:q])
     @movies = @q.result.page params[:page]  
     @genres = Genre.all
+    page = params[:page].to_i if params[:page].present?
+    redirect_to movies_url if params[:page].present? && page > @movies.total_pages
   end
 
   def show   

@@ -1,11 +1,12 @@
 <%= react_component('user/Movie', { user: current_user, 
                                     movie: @movie, 
                                     casts_and_crews: @movie.members, 
-                                    reviews: @movie.reviews, 
+                                    reviews: @reviews, 
                                     token: form_authenticity_token.to_s,
                                     on_list: @on_list,
                                     success: flash[:successful], 
                                     success_create: flash[:successful_create],
                                     success_remove: flash[:successful_remove],
+                                    success_review: flash[:successful_review],
                                     failure: flash[:errors]
                                     }) %>

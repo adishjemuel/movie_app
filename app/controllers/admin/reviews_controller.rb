@@ -13,7 +13,13 @@ class Admin::ReviewsController < Admin::BaseController
   end
 
   def create 
-    @movie = Movie.find(params[:movie][:id]) if params[:movie].present? && params[:movie][:id].present?
+    @movie = Movie.find(params[:movie][:id]) if params[:movie].present? && params[:movie][:id].present? 
+
+    if Review.find_by(movie: @movie, user: current_user) 
+      flash[:successful] = false 
+      redirect_to new_admin_review_url 
+      return
+    end 
     @review = @movie.reviews.create(review_params) if @movie.present?
     @review.user_id = current_user.id if @review.present?
 
@@ -31,8 +37,10 @@ class Admin::ReviewsController < Admin::BaseController
   end 
 
   def update  
-    @movie = Movie.find(params[:movie][:id])
-    if @review.update(review_params)  && @review.update(movie: @movie) 
+    @movie = Movie.find(params[:movie][:id]) 
+    if @review.movie != @movie && Review.find_by(movie: @movie, user: current_user).present?
+      flash[:successful] = false 
+    elsif @review.update(review_params)  && @review.update(movie: @movie) 
       flash[:successful] = true 
     else 
       flash[:errors] = @review.errors

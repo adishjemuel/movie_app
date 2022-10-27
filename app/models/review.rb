@@ -12,6 +12,8 @@ class Review < ApplicationRecord
 
   attribute :movie_title 
 
+  # before_save :ensure_one_review_user_per_movie
+
   def movie_title 
     movie.title 
   end
@@ -27,5 +29,16 @@ class Review < ApplicationRecord
   def review_avatar
     user.avatar.url 
   end
+
+  private 
+
+  # def ensure_one_review_user_per_movie 
+  #   @review = Review.find_by(user_id: user_id, movie_id: movie_id)
+  #   p '------'
+  #   p @review.present? 
+  #   p '------' 
+  # end
+
+
 
 end

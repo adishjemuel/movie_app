@@ -11,18 +11,21 @@ class ReviewsController < ApplicationController
   
   def new  
     @movie = Movie.find(params[:movie_id])
+    @review = Review.find_by(movie: @movie, user: current_user) 
+    redirect_to @movie if @review.present?
   end 
 
   def create 
     @movie = Movie.find(params[:movie_id])
+    redirect_to @movie if Review.find_by(movie: @movie, user: current_user).present? 
     @review = @movie.reviews.create(review_params) 
     @review.user_id = current_user.id 
 
     if @review.save
-      flash[:successful] = true 
+      flash[:successful_review] = true 
     else 
       flash[:errors] = @review.errors
-      flash[:successful] = false 
+      flash[:successful_review] = false 
     end
     redirect_to new_movie_review_url
   end

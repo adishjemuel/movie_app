@@ -92,6 +92,17 @@ const Movie = (props) => {
       </section>
 
       <section className="container mx-4 px-4">
+        {props.success_review && (
+          <div class="alert alert-primary" role="alert">
+            The review was successfully added
+          </div>
+        )}
+        {props.success_review == false && (
+          <div class="alert alert-warning" role="alert">
+            The review was not successfully added. There are some errors or
+            problems
+          </div>
+        )}
         {props.success_create && (
           <div class="alert alert-primary" role="alert">
             The movie was successfully added to your watchlist
@@ -189,7 +200,7 @@ const Movie = (props) => {
 
                     {props.user &&
                       (props.user.username == review.review_user.username ||
-                        props.user.role == "admin") && (
+                        props.user.role == "admin_2" || props.user.role =="admin_3") && (
                         <div class="dropdown ms-5">
                           <button
                             class="btn btn-secondary dropdown-toggle"

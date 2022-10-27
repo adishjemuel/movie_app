@@ -38,8 +38,11 @@ class Ability
 
       can :manage, Review, user: user 
     
-      return unless user.admin_1? || user.admin_2? || user.admin_3?
+      return unless user.admin_2? 
 
+      can :manage, Review 
+      
+      return unless user.admin_3?
       can :manage, :all 
     end
   end

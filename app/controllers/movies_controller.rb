@@ -18,7 +18,8 @@ class MoviesController < ApplicationController
       @on_list = true 
     else
       @on_list = false 
-    end
+    end 
+    @reviews = @movie.reviews.order('created_at DESC')
   end
  
   private
